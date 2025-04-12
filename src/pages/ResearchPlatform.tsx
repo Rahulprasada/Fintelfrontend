@@ -51,7 +51,7 @@ const ResearchPlatform = () => {
                       <div className="rounded-full w-3 h-3 bg-yellow-500"></div>
                       <div className="rounded-full w-3 h-3 bg-green-500"></div>
                     </div>
-                    <p className="text-white text-sm">FinIntel AI Research Platform</p>
+                    <p className="text-white text-sm">FinIntel  AI Research Platform</p>
                     <div></div>
                   </div>
                   <div className="p-6">

@@ -9,7 +9,7 @@ const PrivacyPolicy = () => {
       <main className="flex-grow px-6 py-12 max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">Privacy Policy</h1>
         <p className="mb-4">
-          At <strong>FinIntel</strong>, we are committed to protecting your
+          At <strong>FinIntel </strong>, we are committed to protecting your
           privacy. This Privacy Policy outlines how we collect, use, and
           safeguard your information when you join our exclusive investor
           community and thought leadership platform.
@@ -48,7 +48,7 @@ const PrivacyPolicy = () => {
         <p className="mb-4">
           We do not sell your personal information. We may share information
           with trusted partners solely for the purpose of enhancing your
-          experience within the FinIntel network.
+          experience within the FinIntel  network.
         </p>
 
         <h2 className="text-2xl font-semibold mt-8 mb-4">
@@ -57,8 +57,8 @@ const PrivacyPolicy = () => {
         <p className="mb-4">
           You have the right to access, modify, or delete your personal
           information at any time. To do so, please contact us at{" "}
-          <a href="mailto:info@finintel.com" className="text-blue-600">
-            info@finintel.com
+          <a href="mailto:info@FinIntel .com" className="text-blue-600">
+            info@FinIntel .com
           </a>
           .
         </p>
@@ -69,7 +69,7 @@ const PrivacyPolicy = () => {
           your information, please contact us:
         </p>
         <address className="not-italic mb-4">
-          FinIntel
+          FinIntel 
           <br />
           123 Wall Street
           <br />
@@ -78,8 +78,8 @@ const PrivacyPolicy = () => {
           Phone: +1 (555) 123-4567
           <br />
           Email:{" "}
-          <a href="mailto:info@finintel.com" className="text-blue-600">
-            info@finintel.com
+          <a href="mailto:info@FinIntel .com" className="text-blue-600">
+            info@FinIntel .com
           </a>
         </address>
       </main>

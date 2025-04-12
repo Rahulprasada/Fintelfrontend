@@ -34,7 +34,7 @@ const Header = () => {
           <Link to="/" className="flex items-center gap-2">
             <BarChart3 className="h-8 w-8 text-finance-blue dark:text-white" />
             <span className="font-bold text-xl hidden sm:inline text-finance-blue dark:text-white">
-              FinIntel
+              FinIntel 
             </span>
           </Link>
 

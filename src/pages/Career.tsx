@@ -8,7 +8,7 @@ const Career = () => {
       <Header />
       <main className="flex-grow px-6 py-12 bg-gray">
         <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">Careers at FinIntel</h1>
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">Careers at FinIntel </h1>
           <p className="text-lg text-gray-600 mb-10">
             Join a mission-driven team building the future of institutional finance and collaborative investment insight.
           </p>
@@ -63,12 +63,12 @@ const Career = () => {
 
         <section className="max-w-5xl mx-auto mb-16 text-center">
           <h2 className="text-2xl font-semibold mb-4 text-gray-800">Don't see the right role?</h2>
-          <p className="text-gray-600 mb-4">We’re always looking for talent. Send your resume and tell us why you’d be a great fit at FinIntel.</p>
+          <p className="text-gray-600 mb-4">We’re always looking for talent. Send your resume and tell us why you’d be a great fit at FinIntel .</p>
           <a
-            href="mailto:careers@finintel.com"
+            href="mailto:careers@FinIntel .com"
             className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-full hover:bg-indigo-700 transition"
           >
-            careers@finintel.com
+            careers@FinIntel .com
           </a>
         </section>
       </main>

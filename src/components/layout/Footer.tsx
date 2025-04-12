@@ -10,7 +10,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <BarChart3 className="h-8 w-8" />
-              <span className="font-bold text-xl">FinIntel</span>
+              <span className="font-bold text-xl">FinIntel </span>
             </div>
             <p className="text-gray-300 mb-4">
               Premium financial intelligence for institutional investors and wealth managers.
@@ -72,7 +72,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-gray-300" />
-                <span className="text-gray-300">info@finintel.com</span>
+                <span className="text-gray-300">info@FinIntel .com</span>
               </li>
             </ul>
           </div>
@@ -81,7 +81,7 @@ const Footer = () => {
         <div className="border-t border-gray-700 mt-8 pt-6">
           <div className="flex flex-col sm:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm mb-4 sm:mb-0">
-              &copy; {new Date().getFullYear()} FinIntel. All rights reserved.
+              &copy; {new Date().getFullYear()} FinIntel . All rights reserved.
             </p>
             <div className="flex space-x-6">
               <Link to="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</Link>

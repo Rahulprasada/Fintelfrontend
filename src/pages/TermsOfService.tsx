@@ -10,12 +10,12 @@ const TermsOfService = () => {
             <h1 className="text-3xl font-bold mb-6">Terms of Service</h1>
     
             <p className="mb-4">
-              Welcome to <strong>FinIntel</strong>. By accessing or using our Exclusive Investor Community & Thought Leadership platform, you agree to be bound by these Terms of Service. Please read them carefully.
+              Welcome to <strong>FinIntel </strong>. By accessing or using our Exclusive Investor Community & Thought Leadership platform, you agree to be bound by these Terms of Service. Please read them carefully.
             </p>
     
             <h2 className="text-2xl font-semibold mt-8 mb-4">1. Use of the Platform</h2>
             <p className="mb-4">
-              FinIntel provides a platform for institutional investors, portfolio managers, and financial leaders to connect, collaborate, and share insights. You agree to use the platform only for lawful purposes and in accordance with these Terms.
+              FinIntel  provides a platform for institutional investors, portfolio managers, and financial leaders to connect, collaborate, and share insights. You agree to use the platform only for lawful purposes and in accordance with these Terms.
             </p>
     
             <h2 className="text-2xl font-semibold mt-8 mb-4">2. Account Registration</h2>
@@ -25,7 +25,7 @@ const TermsOfService = () => {
     
             <h2 className="text-2xl font-semibold mt-8 mb-4">3. Intellectual Property</h2>
             <p className="mb-4">
-              All content on the platform, including text, graphics, logos, and software, is the property of FinIntel or its content contributors and is protected by intellectual property laws. You may not reproduce, distribute, or create derivative works without permission.
+              All content on the platform, including text, graphics, logos, and software, is the property of FinIntel  or its content contributors and is protected by intellectual property laws. You may not reproduce, distribute, or create derivative works without permission.
             </p>
     
             <h2 className="text-2xl font-semibold mt-8 mb-4">4. Community Guidelines</h2>
@@ -35,17 +35,17 @@ const TermsOfService = () => {
     
             <h2 className="text-2xl font-semibold mt-8 mb-4">5. Termination</h2>
             <p className="mb-4">
-              FinIntel reserves the right to suspend or terminate your access to the platform at our discretion, without notice, if you violate these Terms or engage in harmful behavior.
+              FinIntel  reserves the right to suspend or terminate your access to the platform at our discretion, without notice, if you violate these Terms or engage in harmful behavior.
             </p>
     
             <h2 className="text-2xl font-semibold mt-8 mb-4">6. Disclaimer of Warranties</h2>
             <p className="mb-4">
-              The platform is provided "as is" without warranties of any kind. FinIntel does not guarantee the accuracy, completeness, or reliability of content shared on the platform.
+              The platform is provided "as is" without warranties of any kind. FinIntel  does not guarantee the accuracy, completeness, or reliability of content shared on the platform.
             </p>
     
             <h2 className="text-2xl font-semibold mt-8 mb-4">7. Limitation of Liability</h2>
             <p className="mb-4">
-              FinIntel shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the platform.
+              FinIntel  shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the platform.
             </p>
     
             <h2 className="text-2xl font-semibold mt-8 mb-4">8. Changes to Terms</h2>
@@ -58,11 +58,11 @@ const TermsOfService = () => {
               For questions regarding these Terms of Service, please contact us:
             </p>
             <address className="not-italic mb-4">
-              FinIntel<br />
+              FinIntel <br />
               123 Wall Street<br />
               New York, NY<br />
               Phone: +1 (555) 123-4567<br />
-              Email: <a href="mailto:info@finintel.com" className="text-blue-600">info@finintel.com</a>
+              Email: <a href="mailto:info@FinIntel .com" className="text-blue-600">info@FinIntel .com</a>
             </address>
           </main>
           <Footer />
