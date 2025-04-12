@@ -1,0 +1,114 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 215 33% 99%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 215 66% 21%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 215 66% 21%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 214 32% 29%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 215 66% 21%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 215 66% 21%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 212 100% 35%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 212 33% 25%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 214 21% 16%;
+    --sidebar-ring: 212 100% 45%;
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 215 66% 10%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 215 66% 10%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 215 66% 21%;
+
+    --secondary: 215 37% 18%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 215 37% 18%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 214 32% 29%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 37% 18%;
+    --input: 215 37% 18%;
+    --ring: 212 91% 60%;
+    
+    --sidebar-background: 214 41% 10%;
+    --sidebar-foreground: 213 20% 85%;
+    --sidebar-primary: 212 100% 35%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 213 33% 17%;
+    --sidebar-accent-foreground: 213 20% 85%;
+    --sidebar-border: 213 33% 17%;
+    --sidebar-ring: 212 100% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .finance-gradient {
+    @apply bg-gradient-to-tr from-finance-blue to-finance-lightblue;
+  }
+  
+  .finance-card {
+    @apply bg-white dark:bg-finance-gray bg-opacity-90 shadow-lg rounded-lg p-6 hover:shadow-xl transition-all duration-300;
+  }
+  
+  .section-heading {
+    @apply text-3xl font-bold mb-4 text-finance-blue dark:text-white;
+  }
+  
+  .subsection-heading {
+    @apply text-xl font-semibold mb-2 text-finance-lightblue dark:text-blue-300;
+  }
+}
