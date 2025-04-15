@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -16,6 +15,13 @@ import Legal from "./pages/Legal";
 import About from "./pages/About";
 import Career from "./pages/Career";
 import Pricing from "./pages/Pricing";
+import Login from "./pages/Login";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResponsiveDrawer from "./components/layout/DashBoardBar";
+import DashBoard from "./pages/Dashboard/Index";
+import BufferStocks from "./pages/BufferStock/Index";
+import DefensivePortifolio from "./pages/DefensivePortfolio/Index";
+import Momentum from "./pages/Momentum/Index";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +43,16 @@ const App = () => (
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<TermsOfService />} />
           <Route path="/legal" element={<Legal />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/dashboard" element={<ResponsiveDrawer />}>
+            <Route index element={<DashBoard />} />
+            <Route path="ai-growth-prediction" element={<DashBoard />} />
+            <Route path="buffet-value-stocks" element={<BufferStocks />} />
+            <Route path="defensive-portfolio" element={<DefensivePortifolio />} />
+            <Route path="momentum-leaders" element={<Momentum />} />
+            {/* Add more dashboard pages here */}
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
