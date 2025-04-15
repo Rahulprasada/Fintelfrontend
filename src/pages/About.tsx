@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 const About = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   return (
     <div className="min-h-screen flex flex-col">
       <Header />

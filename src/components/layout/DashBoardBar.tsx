@@ -77,6 +77,7 @@ export default function ResponsiveDrawer(props: Props) {
 
   const handleNavigation = (path: string) => {
     navigate(path);
+    setMobileOpen(!mobileOpen);
   };
   const heading = routeHeadings[location.pathname] || "Dashboard";
   const drawer = (
@@ -172,7 +173,7 @@ export default function ResponsiveDrawer(props: Props) {
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: "none" } }}
           >
-            <MenuIcon style={{ color: "#080808" }} />
+            <MenuIcon style={{ color: "#160d35" }} />
           </IconButton>
           <AppBarTitle>{heading}</AppBarTitle>
           <StyledAvatar onClick={handleClickOpen}>V</StyledAvatar>
