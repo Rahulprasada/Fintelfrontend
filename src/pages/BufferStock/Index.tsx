@@ -3,7 +3,7 @@ import React from 'react'
 const BufferStocks = () => {
   return (
     <div>
-      asdfsdgdfg
+      BufferStocks
     </div>
   )
 }

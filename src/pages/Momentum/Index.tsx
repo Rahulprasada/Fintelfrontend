@@ -3,7 +3,7 @@ import React from 'react'
 const Momentum = () => {
   return (
     <div>
-      adfvsdv
+      Momentum
     </div>
   )
 }

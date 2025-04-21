@@ -24,6 +24,13 @@ import Avatar from "@mui/material/Avatar";
 import { ProfileDialogBox } from "../ui/ProfileDialogBox";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+import TrendingDownIcon from '@mui/icons-material/TrendingDown';
+import PieChartIcon from '@mui/icons-material/PieChart';
+import PublicIcon from '@mui/icons-material/Public';
+import TimelineIcon from '@mui/icons-material/Timeline';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 
 const drawerWidth = 300;
 
@@ -32,14 +39,29 @@ interface Props {
 }
 
 const DashboardTitle = [
+  { Title: "AI Growth Prediction", link: "/dashboard", icon: <TrendingUpIcon /> },
   { Title: "Buffet Value Stocks", link: "/dashboard/buffet-value-stocks", icon: <ShowChartIcon /> },
-  { Title: "AI Growth Prediction", link: "/dashboard/ai-growth-prediction", icon: <TrendingUpIcon /> },
   { Title: "Defensive Portfolio", link: "/dashboard/defensive-portfolio", icon: <ShieldIcon /> },
   { Title: "Momentum Leaders", link: "/dashboard/momentum-leaders", icon: <SpeedIcon /> },
 ];
+const DashboardTitle1 = [
+  { Title: "Earnings Reports", link: "/dashboard/earnings", icon: <BarChartIcon /> },
+  { Title: "Balance Sheets", link: "/dashboard/balance", icon: <AccountBalanceIcon /> },
+  { Title: "Cash Flow Statements", link: "/dashboard/cashflow", icon: <MonetizationOnIcon /> },
+];
+const DashboardTitle2 = [
+  { Title: "Price Trends", link: "/dashboard/price-trends", icon: <TimelineIcon /> },
+  { Title: "Volume Analysis", link: "/dashboard/volume", icon: <ShowChartIcon /> },
+  { Title: "Moving Averages", link: "/dashboard/moving-averages", icon: <TrendingUpIcon /> },
+];
+const DashboardTitle3 = [
+  { Title: "Interest Rates", link: "/dashboard/interest-rates", icon: <TrendingDownIcon /> },
+  { Title: "Inflation Data", link: "/dashboard/inflation", icon: <PieChartIcon /> },
+  { Title: "GDP Growth", link: "/dashboard/gdp", icon: <PublicIcon /> },
+]
+
 const routeHeadings = {
-  "/dashboard/ai-growth-prediction": "AI Growth Prediction",
-  "/dashboard": "Dashboard",
+  "/dashboard": "AI Growth Prediction",
   "/dashboard/buffet-value-stocks":"Buffet Value Stocks",
   "/dashboard/defensive-portfolio" : "Defensive Portfolio",
   "/dashboard/momentum-leaders":"Momentum Leaders"
@@ -79,7 +101,9 @@ export default function ResponsiveDrawer(props: Props) {
     navigate(path);
     setMobileOpen(!mobileOpen);
   };
+
   const heading = routeHeadings[location.pathname] || "Dashboard";
+
   const drawer = (
     <div>
       <Toolbar>
@@ -89,6 +113,7 @@ export default function ResponsiveDrawer(props: Props) {
         </DrawerHeader>
       </Toolbar>
       {/* <Divider /> */}
+      <Box sx={{ overflowY: "auto"}}>
       <List style={{ margin: "10px" }}>
         <SectionBox>
           <SectionTitle>AI Screener</SectionTitle>
@@ -112,6 +137,76 @@ export default function ResponsiveDrawer(props: Props) {
         </SectionBox>
       </List>
 
+      <List style={{ margin: "10px" }}>
+        <SectionBox>
+          <SectionTitle>Fundamental Analysis</SectionTitle>
+          {DashboardTitle1.map((text, index) => {
+             const isActive = location.pathname === text.link;
+             return (
+            <ListItem key={index} disablePadding>
+              <NavItemBox isActive={isActive}>
+                <ListItemButton  onClick={() => handleNavigation(text.link)}>
+                  <ListItemIcon
+                    className="icon text-[#131212]"
+                    sx={{ minWidth: "30px" }}
+                  >
+                    {text.icon}
+                  </ListItemIcon>
+                  <ListItemText primary={text.Title} />
+                </ListItemButton>
+              </NavItemBox>
+            </ListItem>
+          )})}
+        </SectionBox>
+      </List>
+
+      <List style={{ margin: "10px" }}>
+        <SectionBox>
+          <SectionTitle>Technical Analysis</SectionTitle>
+          {DashboardTitle2.map((text, index) => {
+             const isActive = location.pathname === text.link;
+             return (
+            <ListItem key={index} disablePadding>
+              <NavItemBox isActive={isActive}>
+                <ListItemButton  onClick={() => handleNavigation(text.link)}>
+                  <ListItemIcon
+                    className="icon text-[#131212]"
+                    sx={{ minWidth: "30px" }}
+                  >
+                    {text.icon}
+                  </ListItemIcon>
+                  <ListItemText primary={text.Title} />
+                </ListItemButton>
+              </NavItemBox>
+            </ListItem>
+          )})}
+        </SectionBox>
+      </List>
+
+      <List style={{ margin: "10px" }}>
+        <SectionBox>
+          <SectionTitle>Macro Indicators</SectionTitle>
+          {DashboardTitle3.map((text, index) => {
+             const isActive = location.pathname === text.link;
+             return (
+            <ListItem key={index} disablePadding>
+              <NavItemBox isActive={isActive}>
+                <ListItemButton  onClick={() => handleNavigation(text.link)}>
+                  <ListItemIcon
+                    className="icon text-[#131212]"
+                    sx={{ minWidth: "30px" }}
+                  >
+                    {text.icon}
+                  </ListItemIcon>
+                  <ListItemText primary={text.Title} />
+                </ListItemButton>
+              </NavItemBox>
+            </ListItem>
+          )})}
+        </SectionBox>
+      </List>
+
+{/* 
       <List style={{ margin: "10px" }}>
         <SectionBox sx={{ color: "#666668", fontSize: "14px" }}>
           <SectionTitle>Recent Activity</SectionTitle>
@@ -139,7 +234,8 @@ export default function ResponsiveDrawer(props: Props) {
             </ListItem>
           ))}
         </SectionBox>
-      </List>
+      </List> */}
+      </Box>
     </div>
   );
 
@@ -245,6 +341,7 @@ export default function ResponsiveDrawer(props: Props) {
 
 const DrawerHeader = styled(Box)`
   display: flex;
+  position: fixed;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
