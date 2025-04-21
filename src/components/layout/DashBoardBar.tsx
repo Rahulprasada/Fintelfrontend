@@ -33,6 +33,7 @@ import TimelineIcon from "@mui/icons-material/Timeline";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
 const drawerWidth = 300;
 
@@ -174,6 +175,8 @@ export default function ResponsiveDrawer(props: Props) {
       setExpandedSection("technical");
     } else if (isSectionActive(DashboardTitle3)) {
       setExpandedSection("macro");
+    } else if (isSectionActive(DashboardTitle)) {
+      setExpandedSection("activity");
     }
   }, [location.pathname]);
 
@@ -187,7 +190,7 @@ export default function ResponsiveDrawer(props: Props) {
       </Toolbar>
 
       <Box sx={{ overflowY: "auto" }}>
-        <List style={{ margin: "10px" }}>
+        <List style={{ margin: "10px", padding: "0px 0px 0px 0px" }}>
           <SectionBox>
             <SectionHeader onClick={() => toggleSection("aiScreener")}>
               <SectionTitle>AI Screener</SectionTitle>
@@ -226,7 +229,7 @@ export default function ResponsiveDrawer(props: Props) {
             </Collapse>
           </SectionBox>
         </List>
-        <List style={{ margin: "10px" }}>
+        <List style={{ margin: "10px", padding: "0px 0px 0px 0px" }}>
           <SectionBox>
             <SectionHeader onClick={() => toggleSection("fundamental")}>
               <SectionTitle>Fundamental Analysis</SectionTitle>
@@ -265,7 +268,7 @@ export default function ResponsiveDrawer(props: Props) {
             </Collapse>
           </SectionBox>
         </List>
-        <List style={{ margin: "10px" }}>
+        <List style={{ margin: "10px", padding: "0px 0px 0px 0px" }}>
           <SectionBox>
             <SectionHeader onClick={() => toggleSection("technical")}>
               <SectionTitle>Technical Analysis</SectionTitle>
@@ -304,7 +307,7 @@ export default function ResponsiveDrawer(props: Props) {
             </Collapse>
           </SectionBox>
         </List>
-        <List style={{ margin: "10px" }}>
+        <List style={{ margin: "10px", padding: "0px 0px 0px 0px" }}>
           <SectionBox>
             <SectionHeader onClick={() => toggleSection("macro")}>
               <SectionTitle>Macro Indicators</SectionTitle>
@@ -341,6 +344,48 @@ export default function ResponsiveDrawer(props: Props) {
                 );
               })}
             </Collapse>
+          </SectionBox>
+        </List>
+        <List style={{ margin: "10px", padding: "0px 0px 0px 0px" }}>
+          <SectionBox sx={{ color: "#666668", fontSize: "14px" }}>
+          <SectionHeader onClick={() => toggleSection("activity")}>
+            <SectionTitle>Recent Activity</SectionTitle>
+            {expandedSection === "activity" ? (
+                <KeyboardArrowUpIcon fontSize="small" />
+              ) : (
+                <KeyboardArrowDownIcon fontSize="small" />
+              )}
+            </SectionHeader>
+            <Collapse
+              in={expandedSection === "activity"}
+              timeout="auto"
+              unmountOnExit
+            >
+            {[
+              "Unusual volume in tech sector",
+              "New hedge fund 13f filings",
+              "Smart money flow alert",
+              "Portifolio risk analysis",
+            ].map((text) => (
+              
+              <ListItem key={text} disablePadding>
+                <ListItemButton>
+                  <ListItemIcon sx={{ minWidth: "30px" }}>
+                    <FiberManualRecordIcon
+                      style={{ color: "#4d34d6", fontSize: "16px" }}
+                    />
+                  </ListItemIcon>
+                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <ListItemText
+                      primary={text}
+                      primaryTypographyProps={{ fontSize: "14px" }}
+                    />
+                    <ActivityTime>02h ago</ActivityTime>
+                  </Box>
+                </ListItemButton>
+              </ListItem>
+            ))}
+               </Collapse>
           </SectionBox>
         </List>
       </Box>
@@ -478,7 +523,7 @@ const SectionBox = styled(Box)`
   flex-direction: column;
   background-color: #f7f7f8;
   padding: 8px;
-  border-radius: 10px;
+  border-radius: 5px;
 `;
 
 const SectionTitle = styled(Typography)`
