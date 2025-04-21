@@ -22,6 +22,15 @@ import DashBoard from "./pages/Dashboard/Index";
 import BufferStocks from "./pages/BufferStock/Index";
 import DefensivePortifolio from "./pages/DefensivePortfolio/Index";
 import Momentum from "./pages/Momentum/Index";
+import PriceTrends from "./pages/PriceTrends/Index";
+import VolumeAnalysis from "./pages/VolumeAnalysis/Index";
+import GDPGrowth from "./pages/GDPGrowth/Index";
+import MovingAverage from "./pages/MovingAverages/Index";
+import InterestRate from "./pages/IntrestRate/Index";
+import InflationData from "./pages/InflationData/Index";
+import EarningReport from "./pages/EarningReports/Index";
+import BalanceSheet from "./pages/BalanceSheet/Index";
+import CashFlowStateMent from "./pages/CashFlowStatement/Index";
 
 const queryClient = new QueryClient();
 
@@ -47,10 +56,18 @@ const App = () => (
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/dashboard" element={<ResponsiveDrawer />}>
             <Route index element={<DashBoard />} />
-            <Route path="ai-growth-prediction" element={<DashBoard />} />
             <Route path="buffet-value-stocks" element={<BufferStocks />} />
             <Route path="defensive-portfolio" element={<DefensivePortifolio />} />
             <Route path="momentum-leaders" element={<Momentum />} />
+            <Route path="price-trends" element={<PriceTrends />} />
+            <Route path="volume" element={<VolumeAnalysis />} />
+            <Route path="gdp" element={<GDPGrowth />} />
+            <Route path="moving-averages" element={<MovingAverage />} />
+            <Route path="interest-rates" element={<InterestRate />} />
+            <Route path="inflation" element={<InflationData />} />
+            <Route path="earnings" element={<EarningReport />} />
+            <Route path="balance" element={<BalanceSheet />} />
+            <Route path="cashflow" element={<CashFlowStateMent />} />
             {/* Add more dashboard pages here */}
           </Route>
           <Route path="*" element={<NotFound />} />
