@@ -19,18 +19,30 @@ import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResponsiveDrawer from "./components/layout/DashBoardBar";
 import DashBoard from "./pages/Dashboard/Index";
-import BufferStocks from "./pages/BufferStock/Index";
-import DefensivePortifolio from "./pages/DefensivePortfolio/Index";
-import Momentum from "./pages/Momentum/Index";
-import PriceTrends from "./pages/PriceTrends/Index";
-import VolumeAnalysis from "./pages/VolumeAnalysis/Index";
-import GDPGrowth from "./pages/GDPGrowth/Index";
-import MovingAverage from "./pages/MovingAverages/Index";
-import InterestRate from "./pages/IntrestRate/Index";
-import InflationData from "./pages/InflationData/Index";
-import EarningReport from "./pages/EarningReports/Index";
-import BalanceSheet from "./pages/BalanceSheet/Index";
-import CashFlowStateMent from "./pages/CashFlowStatement/Index";
+import InvestmentAgentLab from "./pages/InvestmentAgentLab/Index";
+import ValuationModel from "./pages/ValuationModels/Index";
+import BusinessPromoterAnalysis from "./pages/BussinessPromotersAnalysis/Index";
+import SignalGenerator from "./pages/SignalGenerator/SignalGenerator";
+import PositionSizing from "./pages/PositionSizing/Index";
+import BackTestingOptimization from "./pages/BackTestingOptimization/Index";
+import AlgorithmExecution from "./pages/AlgorithmExcecution/Index";
+import MarcoDashboard from "./pages/MarcoDashboard/Index";
+import BusinessCycleView from "./pages/BusinessCycleView/Index";
+import FiiSmartMoneyTracker from "./pages/FiiSmartMoneyTracker/Index";
+import BenchMarking from "./pages/BenchMarking";
+import Sustainability from "./pages/Sustainability/Index";
+import GreenWashingDetectionFlag from "./pages/GreenWashingDetectionFlags/Index";
+import LeaderShipIntegrityReport from "./pages/LeaderShipInegrityReport/Index";
+import InsiderRelatedPartyActivity from "./pages/InsiderRelatedPartyActivity/Index";
+import GovernanceRedFlagIndex from "./pages/GovernanceRedFlagIndex/Index";
+import WatchListCoverageTrackers from "./pages/WatchListCoverageTrackers/Index";
+import PMreviewApproval from "./pages/PMreviewApproval/Index";
+import ResearchArchivingVersioning from "./pages/ResearchArchiveVersioning/Index";
+import CommentFeedBackCenter from "./pages/CommentFeedBackCenter/Index";
+import ReportBuilderSetting from "./pages/ReportBuilderSetting/Index";
+import AlertManager from "./pages/AlertManager/Index";
+import UserRolePermission from "./pages/UserRolePermission/Index";
+import BrokerApiIntegration from "./pages/BrokerApiIntegration/Index";
 
 const queryClient = new QueryClient();
 
@@ -56,18 +68,36 @@ const App = () => (
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/dashboard" element={<ResponsiveDrawer />}>
             <Route index element={<DashBoard />} />
-            <Route path="buffet-value-stocks" element={<BufferStocks />} />
-            <Route path="defensive-portfolio" element={<DefensivePortifolio />} />
-            <Route path="momentum-leaders" element={<Momentum />} />
-            <Route path="price-trends" element={<PriceTrends />} />
-            <Route path="volume" element={<VolumeAnalysis />} />
-            <Route path="gdp" element={<GDPGrowth />} />
-            <Route path="moving-averages" element={<MovingAverage />} />
-            <Route path="interest-rates" element={<InterestRate />} />
-            <Route path="inflation" element={<InflationData />} />
-            <Route path="earnings" element={<EarningReport />} />
-            <Route path="balance" element={<BalanceSheet />} />
-            <Route path="cashflow" element={<CashFlowStateMent />} />
+            <Route path="investment-agent-lab" element={<InvestmentAgentLab />} />
+            <Route path="valuation-models" element={<ValuationModel/>}/>
+            <Route path="business-promoter-analysis" element={<BusinessPromoterAnalysis/>}/>
+            <Route path="signal-generator"  element={<SignalGenerator/>}/>
+            <Route path="position-sizing" element={<PositionSizing/>}/>
+            <Route path="backtesting-optimization" element={<BackTestingOptimization/>}/>
+            <Route path="algorithmic-execution" element={<AlgorithmExecution/>} />
+            <Route path="macro-dashboard"  element={<MarcoDashboard/>}/>
+            <Route path="business-cycle-view"  element={<BusinessCycleView/>}/>
+            <Route path="fii-smart-money-tracker" element={<FiiSmartMoneyTracker/>}/>
+            <Route path="peer-esg-benchmarking" element={<BenchMarking/>}/>
+            <Route path="leadership-integrity-reports" element={<LeaderShipIntegrityReport/>}/>
+            <Route path="insider-related-party-activity" element={<InsiderRelatedPartyActivity/>}/>
+            <Route path="governance-red-flag-index" element={<GovernanceRedFlagIndex/>}/>
+            <Route path="watchlists-coverage-tracker" element={<WatchListCoverageTrackers/>}/>
+            <Route path="pm-review-approvals" element={<PMreviewApproval/>}/>
+            <Route path="research-archive-versioning" element={<ResearchArchivingVersioning/>}/>
+            <Route path="comments-feedback-center" element={<CommentFeedBackCenter/>}/>
+            <Route path="report-builder-settings" element={<ReportBuilderSetting/>}/>
+            <Route path="alert-manager" element={<AlertManager/>}/>
+            <Route path="user-roles-permissions" element={<UserRolePermission/>}/>
+            <Route path="broker-api-integrations" element={<BrokerApiIntegration/>}/>
+            <Route
+              path="esg-sustainability-analytics"
+              element={<Sustainability/>}
+            />
+            <Route
+              path="greenwashing-detection-flags"
+              element={<GreenWashingDetectionFlag/>}
+            />
             {/* Add more dashboard pages here */}
           </Route>
           <Route path="*" element={<NotFound />} />
