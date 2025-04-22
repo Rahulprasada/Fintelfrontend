@@ -15,10 +15,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { BarChart3 } from "lucide-react";
-import ShowChartIcon from "@mui/icons-material/ShowChart";
-import TrendingUpIcon from "@mui/icons-material/TrendingUp";
-import ShieldIcon from "@mui/icons-material/Shield";
-import SpeedIcon from "@mui/icons-material/Speed";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Collapse from "@mui/material/Collapse";
@@ -26,97 +22,31 @@ import Avatar from "@mui/material/Avatar";
 import { ProfileDialogBox } from "../ui/ProfileDialogBox";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
-import TrendingDownIcon from "@mui/icons-material/TrendingDown";
-import PieChartIcon from "@mui/icons-material/PieChart";
-import PublicIcon from "@mui/icons-material/Public";
-import TimelineIcon from "@mui/icons-material/Timeline";
-import BarChartIcon from "@mui/icons-material/BarChart";
-import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
-import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import {
+  DashboardTitle,
+  DashboardTitle1,
+  DashboardTitle2,
+  DashboardTitle3,
+  DashboardTitle4,
+  DashboardTitle5,
+  DashboardTitle6,
+} from "./NavConfig";
 
-const drawerWidth = 300;
+const drawerWidth = 320;
 
 interface Props {
   window?: () => Window;
 }
 
-const DashboardTitle = [
-  {
-    Title: "AI Growth Prediction",
-    link: "/dashboard",
-    icon: <TrendingUpIcon />,
-  },
-  {
-    Title: "Buffet Value Stocks",
-    link: "/dashboard/buffet-value-stocks",
-    icon: <ShowChartIcon />,
-  },
-  {
-    Title: "Defensive Portfolio",
-    link: "/dashboard/defensive-portfolio",
-    icon: <ShieldIcon />,
-  },
-  {
-    Title: "Momentum Leaders",
-    link: "/dashboard/momentum-leaders",
-    icon: <SpeedIcon />,
-  },
+const routeHeadings = [
+  ...DashboardTitle,
+  ...DashboardTitle1,
+  ...DashboardTitle2,
+  ...DashboardTitle3,
+  ...DashboardTitle4,
+  ...DashboardTitle5,
+  ...DashboardTitle6,
 ];
-const DashboardTitle1 = [
-  {
-    Title: "Earnings Reports",
-    link: "/dashboard/earnings",
-    icon: <BarChartIcon />,
-  },
-  {
-    Title: "Balance Sheets",
-    link: "/dashboard/balance",
-    icon: <AccountBalanceIcon />,
-  },
-  {
-    Title: "Cash Flow Statements",
-    link: "/dashboard/cashflow",
-    icon: <MonetizationOnIcon />,
-  },
-];
-const DashboardTitle2 = [
-  {
-    Title: "Price Trends",
-    link: "/dashboard/price-trends",
-    icon: <TimelineIcon />,
-  },
-  {
-    Title: "Volume Analysis",
-    link: "/dashboard/volume",
-    icon: <ShowChartIcon />,
-  },
-  {
-    Title: "Moving Averages",
-    link: "/dashboard/moving-averages",
-    icon: <TrendingUpIcon />,
-  },
-];
-const DashboardTitle3 = [
-  {
-    Title: "Interest Rates",
-    link: "/dashboard/interest-rates",
-    icon: <TrendingDownIcon />,
-  },
-  {
-    Title: "Inflation Data",
-    link: "/dashboard/inflation",
-    icon: <PieChartIcon />,
-  },
-  { Title: "GDP Growth", link: "/dashboard/gdp", icon: <PublicIcon /> },
-];
-
-const routeHeadings = {
-  "/dashboard": "AI Growth Prediction",
-  "/dashboard/buffet-value-stocks": "Buffet Value Stocks",
-  "/dashboard/defensive-portfolio": "Defensive Portfolio",
-  "/dashboard/momentum-leaders": "Momentum Leaders",
-};
 
 export default function ResponsiveDrawer(props: Props) {
   const navigate = useNavigate();
@@ -160,7 +90,8 @@ export default function ResponsiveDrawer(props: Props) {
     setMobileOpen(!mobileOpen);
   };
 
-  const heading = routeHeadings[location.pathname] || "Dashboard";
+  const heading = routeHeadings.find(i => i.link === location.pathname)?.Title;
+
 
   const isSectionActive = (items) => {
     return items.some((item) => location.pathname === item.link);
@@ -168,20 +99,24 @@ export default function ResponsiveDrawer(props: Props) {
 
   React.useEffect(() => {
     if (isSectionActive(DashboardTitle)) {
-      setExpandedSection("aiScreener");
+      setExpandedSection("researchhub");
     } else if (isSectionActive(DashboardTitle1)) {
-      setExpandedSection("fundamental");
+      setExpandedSection("quantengine");
     } else if (isSectionActive(DashboardTitle2)) {
-      setExpandedSection("technical");
+      setExpandedSection("macromarketintelligence");
     } else if (isSectionActive(DashboardTitle3)) {
-      setExpandedSection("macro");
-    } else if (isSectionActive(DashboardTitle)) {
-      setExpandedSection("activity");
+      setExpandedSection("esgintelligence");
+    } else if (isSectionActive(DashboardTitle4)) {
+      setExpandedSection("forensicreports");
+    } else if (isSectionActive(DashboardTitle5)) {
+      setExpandedSection("portfolioworkspace");
+    } else if (isSectionActive(DashboardTitle6)) {
+      setExpandedSection("toolssettings");
     }
   }, [location.pathname]);
 
   const drawer = (
-    <div>
+    <div className="flex flex-col h-full">
       <Toolbar>
         <DrawerHeader>
           <BarChart3 className="h-8 w-8 text-finance-blue dark:text-white" />
@@ -189,12 +124,12 @@ export default function ResponsiveDrawer(props: Props) {
         </DrawerHeader>
       </Toolbar>
 
-      <Box sx={{ overflowY: "auto" }}>
+      <ScrollableContent>
         <List style={{ margin: "10px", padding: "0px 0px 0px 0px" }}>
           <SectionBox>
-            <SectionHeader onClick={() => toggleSection("aiScreener")}>
-              <SectionTitle>AI Screener</SectionTitle>
-              {expandedSection === "aiScreener" ? (
+            <SectionHeader onClick={() => toggleSection("researchhub")}>
+              <SectionTitle>Research Hub</SectionTitle>
+              {expandedSection === "researchhub" ? (
                 <KeyboardArrowUpIcon fontSize="small" />
               ) : (
                 <KeyboardArrowDownIcon fontSize="small" />
@@ -202,7 +137,7 @@ export default function ResponsiveDrawer(props: Props) {
             </SectionHeader>
 
             <Collapse
-              in={expandedSection === "aiScreener"}
+              in={expandedSection === "researchhub"}
               timeout="auto"
               unmountOnExit
             >
@@ -231,9 +166,9 @@ export default function ResponsiveDrawer(props: Props) {
         </List>
         <List style={{ margin: "10px", padding: "0px 0px 0px 0px" }}>
           <SectionBox>
-            <SectionHeader onClick={() => toggleSection("fundamental")}>
-              <SectionTitle>Fundamental Analysis</SectionTitle>
-              {expandedSection === "fundamental" ? (
+            <SectionHeader onClick={() => toggleSection("quantengine")}>
+              <SectionTitle>Quant Engine</SectionTitle>
+              {expandedSection === "quantengine" ? (
                 <KeyboardArrowUpIcon fontSize="small" />
               ) : (
                 <KeyboardArrowDownIcon fontSize="small" />
@@ -241,7 +176,7 @@ export default function ResponsiveDrawer(props: Props) {
             </SectionHeader>
 
             <Collapse
-              in={expandedSection === "fundamental"}
+              in={expandedSection === "quantengine"}
               timeout="auto"
               unmountOnExit
             >
@@ -270,9 +205,11 @@ export default function ResponsiveDrawer(props: Props) {
         </List>
         <List style={{ margin: "10px", padding: "0px 0px 0px 0px" }}>
           <SectionBox>
-            <SectionHeader onClick={() => toggleSection("technical")}>
-              <SectionTitle>Technical Analysis</SectionTitle>
-              {expandedSection === "technical" ? (
+            <SectionHeader
+              onClick={() => toggleSection("macromarketintelligence")}
+            >
+              <SectionTitle>Macro & Market Intelligence</SectionTitle>
+              {expandedSection === "macromarketintelligence" ? (
                 <KeyboardArrowUpIcon fontSize="small" />
               ) : (
                 <KeyboardArrowDownIcon fontSize="small" />
@@ -280,7 +217,7 @@ export default function ResponsiveDrawer(props: Props) {
             </SectionHeader>
 
             <Collapse
-              in={expandedSection === "technical"}
+              in={expandedSection === "macromarketintelligence"}
               timeout="auto"
               unmountOnExit
             >
@@ -309,9 +246,9 @@ export default function ResponsiveDrawer(props: Props) {
         </List>
         <List style={{ margin: "10px", padding: "0px 0px 0px 0px" }}>
           <SectionBox>
-            <SectionHeader onClick={() => toggleSection("macro")}>
-              <SectionTitle>Macro Indicators</SectionTitle>
-              {expandedSection === "macro" ? (
+            <SectionHeader onClick={() => toggleSection("esgintelligence")}>
+              <SectionTitle>ESG Intelligence</SectionTitle>
+              {expandedSection === "esgintelligence" ? (
                 <KeyboardArrowUpIcon fontSize="small" />
               ) : (
                 <KeyboardArrowDownIcon fontSize="small" />
@@ -319,7 +256,7 @@ export default function ResponsiveDrawer(props: Props) {
             </SectionHeader>
 
             <Collapse
-              in={expandedSection === "macro"}
+              in={expandedSection === "esgintelligence"}
               timeout="auto"
               unmountOnExit
             >
@@ -347,48 +284,123 @@ export default function ResponsiveDrawer(props: Props) {
           </SectionBox>
         </List>
         <List style={{ margin: "10px", padding: "0px 0px 0px 0px" }}>
-          <SectionBox sx={{ color: "#666668", fontSize: "14px" }}>
-          <SectionHeader onClick={() => toggleSection("activity")}>
-            <SectionTitle>Recent Activity</SectionTitle>
-            {expandedSection === "activity" ? (
+          <SectionBox>
+            <SectionHeader onClick={() => toggleSection("forensicreports")}>
+              <SectionTitle>Forensic Reports (Premium)</SectionTitle>
+              {expandedSection === "forensicreports" ? (
                 <KeyboardArrowUpIcon fontSize="small" />
               ) : (
                 <KeyboardArrowDownIcon fontSize="small" />
               )}
             </SectionHeader>
+
             <Collapse
-              in={expandedSection === "activity"}
+              in={expandedSection === "forensicreports"}
               timeout="auto"
               unmountOnExit
             >
-            {[
-              "Unusual volume in tech sector",
-              "New hedge fund 13f filings",
-              "Smart money flow alert",
-              "Portifolio risk analysis",
-            ].map((text) => (
-              
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon sx={{ minWidth: "30px" }}>
-                    <FiberManualRecordIcon
-                      style={{ color: "#4d34d6", fontSize: "16px" }}
-                    />
-                  </ListItemIcon>
-                  <Box sx={{ display: "flex", flexDirection: "column" }}>
-                    <ListItemText
-                      primary={text}
-                      primaryTypographyProps={{ fontSize: "14px" }}
-                    />
-                    <ActivityTime>02h ago</ActivityTime>
-                  </Box>
-                </ListItemButton>
-              </ListItem>
-            ))}
-               </Collapse>
+              {DashboardTitle4.map((text, index) => {
+                const isActive = location.pathname === text.link;
+                return (
+                  <ListItem key={index} disablePadding>
+                    <NavItemBox isActive={isActive}>
+                      <ListItemButton
+                        onClick={() => handleNavigation(text.link)}
+                      >
+                        <ListItemIcon
+                          className="icon text-[#131212]"
+                          sx={{ minWidth: "30px" }}
+                        >
+                          {text.icon}
+                        </ListItemIcon>
+                        <ListItemText primary={text.Title} />
+                      </ListItemButton>
+                    </NavItemBox>
+                  </ListItem>
+                );
+              })}
+            </Collapse>
           </SectionBox>
         </List>
-      </Box>
+        <List style={{ margin: "10px", padding: "0px 0px 0px 0px" }}>
+          <SectionBox>
+            <SectionHeader onClick={() => toggleSection("portfolioworkspace")}>
+              <SectionTitle>Portfolio Workspace</SectionTitle>
+              {expandedSection === "portfolioworkspace" ? (
+                <KeyboardArrowUpIcon fontSize="small" />
+              ) : (
+                <KeyboardArrowDownIcon fontSize="small" />
+              )}
+            </SectionHeader>
+
+            <Collapse
+              in={expandedSection === "portfolioworkspace"}
+              timeout="auto"
+              unmountOnExit
+            >
+              {DashboardTitle5.map((text, index) => {
+                const isActive = location.pathname === text.link;
+                return (
+                  <ListItem key={index} disablePadding>
+                    <NavItemBox isActive={isActive}>
+                      <ListItemButton
+                        onClick={() => handleNavigation(text.link)}
+                      >
+                        <ListItemIcon
+                          className="icon text-[#131212]"
+                          sx={{ minWidth: "30px" }}
+                        >
+                          {text.icon}
+                        </ListItemIcon>
+                        <ListItemText primary={text.Title} />
+                      </ListItemButton>
+                    </NavItemBox>
+                  </ListItem>
+                );
+              })}
+            </Collapse>
+          </SectionBox>
+        </List>
+        <List style={{ margin: "10px", padding: "0px 0px 0px 0px" }}>
+          <SectionBox>
+            <SectionHeader onClick={() => toggleSection("toolssettings")}>
+              <SectionTitle>Tools & Settings</SectionTitle>
+              {expandedSection === "toolssettings" ? (
+                <KeyboardArrowUpIcon fontSize="small" />
+              ) : (
+                <KeyboardArrowDownIcon fontSize="small" />
+              )}
+            </SectionHeader>
+
+            <Collapse
+              in={expandedSection === "toolssettings"}
+              timeout="auto"
+              unmountOnExit
+            >
+              {DashboardTitle6.map((text, index) => {
+                const isActive = location.pathname === text.link;
+                return (
+                  <ListItem key={index} disablePadding>
+                    <NavItemBox isActive={isActive}>
+                      <ListItemButton
+                        onClick={() => handleNavigation(text.link)}
+                      >
+                        <ListItemIcon
+                          className="icon text-[#131212]"
+                          sx={{ minWidth: "30px" }}
+                        >
+                          {text.icon}
+                        </ListItemIcon>
+                        <ListItemText primary={text.Title} />
+                      </ListItemButton>
+                    </NavItemBox>
+                  </ListItem>
+                );
+              })}
+            </Collapse>
+          </SectionBox>
+        </List>
+      </ScrollableContent>
     </div>
   );
 
@@ -505,11 +517,40 @@ const SectionHeader = styled("div")({
 
 const DrawerHeader = styled(Box)`
   display: flex;
-  position: fixed;
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+  z-index: 10;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
   padding: 18px 20px 10px 10px;
+  /* box-shadow: 0 4px 6px -6px rgba(0, 0, 0, 0.1); */
+`;
+const ScrollableContent = styled(Box)`
+  flex: 1;
+  overflow-y: auto;
+  padding-top: 10px;
+  
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: #fff;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #281c6d;
+    border-radius: 10px;
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    background: #1a1357;
+  }
+  
+  scrollbar-width: thin;
+  scrollbar-color: #281c6d #fff;
 `;
 
 const LogoText = styled(Typography)`
@@ -556,11 +597,6 @@ const NavItemBox = styled(Box, {
   .icon {
     color: ${({ isActive }) => (isActive ? "#fff" : "#131212")};
   }
-`;
-
-const ActivityTime = styled(Typography)`
-  color: #c2c2c5;
-  font-size: 12px;
 `;
 
 const AppBarTitle = styled(Typography)`
