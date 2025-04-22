@@ -11,9 +11,9 @@ const Model = [
 const Cards = () => {
   return (
     <MainCard>
-      <Typography sx={{ color: "#1e134e", fontSize: "22px", fontWeight: "700", mb: 2 }}>
-        AI Growth Prediction Model
-      </Typography>
+      {/* <Typography sx={{ color: "#1e134e", fontSize: "22px", fontWeight: "700", mb: 2 }}>
+      Equity Research Reports
+      </Typography> */}
       <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" gap={2} width="100%">
         {Model.map((item, index) => (
           <CardBox key={index}>
