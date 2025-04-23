@@ -64,10 +64,10 @@ const TermsOfService = () => {
             </p>
             <address className="not-italic mb-4">
               FinIntel <br />
-              123 Wall Street<br />
-              New York, NY<br />
-              Phone: +1 (555) 123-4567<br />
-              Email: <a href="mailto:info@FinIntel .com" className="text-blue-600">info@FinIntel .com</a>
+              01, Mint Street,  George Town<br />
+              Chennai,Tamil Nadu 600001<br />
+              Phone: +91 (868) 000-8383<br />
+              Email: <a href="mailto:info@themintstreet.com" className="text-blue-600">info@themintstreet.com</a>
             </address>
           </main>
           <Footer />

@@ -72,7 +72,7 @@ const Header = () => {
 
           {/* Action Buttons */}
           <div className="flex items-center gap-2">
-            <Button
+            {/* <Button
               variant="ghost"
               size="icon"
               className="text-gray-600 dark:text-gray-300"
@@ -101,7 +101,7 @@ const Header = () => {
                 <DropdownMenuItem>Settings</DropdownMenuItem>
                 <DropdownMenuItem>Sign out</DropdownMenuItem>
               </DropdownMenuContent>
-            </DropdownMenu>
+            </DropdownMenu> */}
             <Link to="/login"  className="hidden lg:inline-flex">
               <Button className="bg-finance-blue hover:bg-finance-accent">
                 LogIn

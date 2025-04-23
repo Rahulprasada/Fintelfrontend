@@ -43,6 +43,7 @@ import ReportBuilderSetting from "./pages/ReportBuilderSetting/Index";
 import AlertManager from "./pages/AlertManager/Index";
 import UserRolePermission from "./pages/UserRolePermission/Index";
 import BrokerApiIntegration from "./pages/BrokerApiIntegration/Index";
+import EquityResearchReport from "./pages/EquityResearchReport/Index";
 
 const queryClient = new QueryClient();
 
@@ -68,6 +69,7 @@ const App = () => (
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/dashboard" element={<ResponsiveDrawer />}>
             <Route index element={<DashBoard />} />
+            <Route path="equity-research-report" element={<EquityResearchReport/>} />
             <Route path="investment-agent-lab" element={<InvestmentAgentLab />} />
             <Route path="valuation-models" element={<ValuationModel/>}/>
             <Route path="business-promoter-analysis" element={<BusinessPromoterAnalysis/>}/>

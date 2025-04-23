@@ -49,10 +49,10 @@ const About = () => {
           <h2 className="text-3xl font-semibold mb-6 text-gray-800">Our Headquarters</h2>
           <div className="bg-white shadow-md rounded-xl p-6 text-gray-700">
             <p><strong>FinIntel </strong></p>
-            <p>123 Wall Street</p>
-            <p>New York, NY</p>
-            <p className="mt-2">📞 +1 (555) 123-4567</p>
-            <p>📧 <a href="mailto:info@FinIntel .com" className="text-blue-600">info@FinIntel .com</a></p>
+            <p>01, Mint Street,  George Town</p>
+            <p> Chennai, Tamil Nadu 600001</p>
+            <p className="mt-2">📞 +91 (868) 000-8383</p>
+            <p>📧 <a href="mailto:info@themintstreet.com" className="text-blue-600">info@themintstreet.com</a></p>
           </div>
         </section>
       </main>

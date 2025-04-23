@@ -3,11 +3,10 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 const PrivacyPolicy = () => {
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -53,7 +52,7 @@ const PrivacyPolicy = () => {
         <p className="mb-4">
           We do not sell your personal information. We may share information
           with trusted partners solely for the purpose of enhancing your
-          experience within the FinIntel  network.
+          experience within the FinIntel network.
         </p>
 
         <h2 className="text-2xl font-semibold mt-8 mb-4">
@@ -74,17 +73,17 @@ const PrivacyPolicy = () => {
           your information, please contact us:
         </p>
         <address className="not-italic mb-4">
-          FinIntel 
+          FinIntel
           <br />
-          123 Wall Street
+          01, Mint Street, George Town
           <br />
-          New York, NY
+          Chennai, Tamil Nadu 600001
           <br />
-          Phone: +1 (555) 123-4567
+          Phone: +91 (868) 000-8383
           <br />
           Email:{" "}
-          <a href="mailto:info@FinIntel .com" className="text-blue-600">
-            info@FinIntel .com
+          <a href="mailto: info@themintstreet.com" className="text-blue-600">
+            info@themintstreet.com
           </a>
         </address>
       </main>
