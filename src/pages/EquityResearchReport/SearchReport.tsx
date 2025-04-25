@@ -11,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { PlusCircle, Search, Filter } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { ReportCard } from "./ReportCard";
 
 interface Report {
@@ -99,13 +99,13 @@ const SearchReport = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("");
 
-  const handleCreateReport = () => {
-    navigate("newreport");
-  };
-
-  const handleReportClick = (report: any) => {
-    navigate(`equity-research-report/${report.id}`);
-  };
+  const handleReportClick = useCallback((report: any) => {
+    navigate(`/dashboard/equity-research-report/${report.id}`);
+  }, [navigate]);
+  
+  const handleCreateReport = useCallback(() => {
+    navigate("/dashboard/equity-research-report/newreport");
+  }, [navigate]);
 
   const filteredReports = dummyReports.filter((report: any) => {
     const matchesSearch =

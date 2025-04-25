@@ -16,21 +16,20 @@ import {
 import { toast } from "sonner";
 import {
   Save,
-  ArrowBigLeft,
+  ChevronLeft,
   FileText,
   Send,
   Download,
   MessagesSquare,
   History,
   ChevronDown,
-  Play,
   PlusCircle,
   Table,
   BarChart,
-  Sparkles,
 } from "lucide-react";
 import BackGroundImage1 from "../../asset/cardbackground.jpg";
 import ReportSection from "./ReportSection";
+import { Divider } from "@mui/material";
 
 const mockSections = [
   {
@@ -118,6 +117,7 @@ export default function ReportEditor() {
       toast.success(`Generated ${sectionId} section successfully`);
     }, 1500);
   };
+
   if (!id) {
     return (
       <div>
@@ -128,46 +128,54 @@ export default function ReportEditor() {
       </div>
     );
   }
+
   return (
-    <div className="h-full flex flex-col">
+    <div className="flex flex-col w-full">
+      {/* Header Section - Made responsive for smaller screens */}
       <div
-        className="flex items-center justify-between mb-6 bg-slate-200 p-4 rounded-lg"
+        className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 bg-slate-200 p-3 sm:p-4 rounded-lg gap-4"
         style={{
           backgroundImage: `url(${BackGroundImage1})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-        <div className="flex items-center gap-4">
-          <Button variant="ghost" size="sm" onClick={() => navigate(-1)}>
-            <ArrowBigLeft size={24} />
-          </Button>
-
-          <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-2xl font-bold">Q4 FY25 Earnings Update</h1>
-              <Badge variant="outline">Draft</Badge>
+        <div className="flex items-center gap-2 sm:gap-4 w-full sm:w-auto">
+          <div className="flex items-center">
+            <ChevronLeft
+              size={20}
+              onClick={() => navigate(-1)}
+              cursor={"pointer"}
+              className="mr-2"
+            />
+            <Divider orientation="vertical" flexItem className="hidden sm:block" />
+          </div>
+          <div className="w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+              <h1 className="text-xl sm:text-2xl font-bold truncate">Q4 FY25 Earnings Update</h1>
+              <Badge variant="outline" className="self-start sm:self-auto">Draft</Badge>
             </div>
-            <div className="flex items-center text-sm text-gray-500">
-              <FileText size={14} className="mr-1" />
-              <span>Infosys Ltd (INFY.NS) • IT Services</span>
+            <div className="flex items-center text-xs sm:text-sm text-gray-500 mt-1">
+              <FileText size={12} className="mr-1 flex-shrink-0" />
+              <span className="truncate">Infosys Ltd (INFY.NS) • IT Services</span>
             </div>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" onClick={handleSaveDraft}>
-            <Save size={16} className="mr-2" />
+        {/* Action Buttons - Stack on mobile, horizontal on larger screens */}
+        <div className="flex flex-wrap gap-2 w-full sm:w-auto justify-end">
+          <Button variant="outline" size="sm" onClick={handleSaveDraft} className="flex-grow sm:flex-grow-0">
+            <Save size={16} className="mr-2 hidden sm:inline" />
             Save Draft
           </Button>
 
           <Button
             size="sm"
-            className="bg-finance-blue hover:bg-blue-800"
+            className="bg-finance-blue hover:bg-blue-800 flex-grow sm:flex-grow-0"
             onClick={handleSubmitForReview}
           >
-            <Send size={16} className="mr-2" />
-            Submit for Review
+            <Send size={16} className="mr-2 hidden sm:inline" />
+            Submit
           </Button>
 
           <DropdownMenu>
@@ -198,57 +206,62 @@ export default function ReportEditor() {
         </div>
       </div>
 
+      {/* Tabs Component - Adjusted for mobile view */}
       <Tabs
         value={activeTab}
         onValueChange={setActiveTab}
         className="flex-1 flex flex-col"
       >
-        <div className="bg-white border rounded-t-lg">
+        <div className="bg-white border rounded-t-lg overflow-x-auto">
           <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0">
             <TabsTrigger
               value="edit"
-              className="rounded-none border-b-2 border-transparent data-[state=active]:border-finance-blue data-[state=active]:bg-white px-2 py-2"
+              className="rounded-none border-b-2 border-transparent data-[state=active]:border-finance-blue data-[state=active]:bg-white px-2 py-2 text-sm"
             >
               Editor
             </TabsTrigger>
             <TabsTrigger
               value="preview"
-              className="rounded-none border-b-2 border-transparent data-[state=active]:border-finance-blue data-[state=active]:bg-white px-2 py-2"
+              className="rounded-none border-b-2 border-transparent data-[state=active]:border-finance-blue data-[state=active]:bg-white px-2 py-2 text-sm"
             >
               Preview
             </TabsTrigger>
             <TabsTrigger
               value="comments"
-              className="rounded-none border-b-2 border-transparent data-[state=active]:border-finance-blue data-[state=active]:bg-white px-2 py-2"
+              className="rounded-none border-b-2 border-transparent data-[state=active]:border-finance-blue data-[state=active]:bg-white px-2 py-2 text-sm"
             >
               Comments
             </TabsTrigger>
           </TabsList>
         </div>
 
+        {/* Edit Tab Content */}
         <TabsContent
           value="edit"
-          className="flex-1 overflow-auto mt-0 bg-white border border-t-0 rounded-b-lg p-6"
+          className="flex-1 overflow-auto mt-0 bg-white border border-t-0 rounded-b-lg p-3 sm:p-6"
         >
-          <div className="flex justify-end mb-4 gap-2">
-            <Button variant="outline" size="sm">
-              <PlusCircle size={14} className="mr-2" />
-              Add Section
+          <div className="flex flex-wrap justify-end mb-4 gap-2">
+            <Button variant="outline" size="sm" className="text-xs sm:text-sm">
+              <PlusCircle size={14} className="mr-1 sm:mr-2" />
+              <span className="hidden xs:inline">Add Section</span>
+              <span className="xs:hidden">Section</span>
             </Button>
-            <Button variant="outline" size="sm">
-              <Table size={14} className="mr-2" />
-              Insert Table
+            <Button variant="outline" size="sm" className="text-xs sm:text-sm">
+              <Table size={14} className="mr-1 sm:mr-2" />
+              <span className="hidden xs:inline">Insert Table</span>
+              <span className="xs:hidden">Table</span>
             </Button>
-            <Button variant="outline" size="sm">
-              <BarChart size={14} className="mr-2" />
-              Add Chart
+            <Button variant="outline" size="sm" className="text-xs sm:text-sm">
+              <BarChart size={14} className="mr-1 sm:mr-2" />
+              <span className="hidden xs:inline">Add Chart</span>
+              <span className="xs:hidden">Chart</span>
             </Button>
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {sections.map((section, idx) => (
               <div key={section.id}>
-                {idx > 0 && <Separator className="my-8" />}
+                {idx > 0 && <Separator className="my-6 sm:my-8" />}
                 <ReportSection
                   section={section}
                   onGenerate={() => generateSection(section.id)}
@@ -258,56 +271,58 @@ export default function ReportEditor() {
           </div>
         </TabsContent>
 
+        {/* Preview Tab Content */}
         <TabsContent
           value="preview"
-          className="flex-1 overflow-auto mt-0 bg-white border border-t-0 rounded-b-lg p-8"
+          className="flex-1 overflow-auto mt-0 bg-white border border-t-0 rounded-b-lg p-4 sm:p-8"
         >
           <div className="max-w-4xl mx-auto editor-content">
-            <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold mb-2">
+            <div className="text-center mb-6 sm:mb-8">
+              <h1 className="text-2xl sm:text-3xl font-bold mb-2">
                 Q4 FY25 Earnings Update
               </h1>
-              <p className="text-xl">Infosys Ltd (INFY.NS)</p>
-              <p className="text-gray-500">April 23, 2025</p>
+              <p className="text-lg sm:text-xl">Infosys Ltd (INFY.NS)</p>
+              <p className="text-gray-500 text-sm sm:text-base">April 23, 2025</p>
             </div>
 
             {sections.map((section, idx) => (
-              <div key={section.id} className="mb-6">
-                <h2 className="text-xl font-bold mb-3">{section.title}</h2>
-                <p>{section.content}</p>
+              <div key={section.id} className="mb-5 sm:mb-6">
+                <h2 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3">{section.title}</h2>
+                <p className="text-sm sm:text-base">{section.content}</p>
               </div>
             ))}
           </div>
         </TabsContent>
 
+        {/* Comments Tab Content */}
         <TabsContent
           value="comments"
-          className="flex-1 overflow-auto mt-0 bg-white border border-t-0 rounded-b-lg p-6"
+          className="flex-1 overflow-auto mt-0 bg-white border border-t-0 rounded-b-lg p-3 sm:p-6"
         >
-          <div className="space-y-6">
-            <h3 className="font-semibold">All Comments</h3>
+          <div className="space-y-4 sm:space-y-6">
+            <h3 className="font-semibold text-sm sm:text-base">All Comments</h3>
 
             {sections.flatMap((section) =>
               section.comments.map((comment) => (
                 <div
                   key={comment.id}
-                  className="bg-gray-50 border rounded-lg p-4"
+                  className="bg-gray-50 border rounded-lg p-3 sm:p-4"
                 >
-                  <div className="flex justify-between items-start mb-2">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
                     <div>
-                      <p className="font-medium">{comment.user}</p>
-                      <p className="text-sm text-gray-500">
+                      <p className="font-medium text-sm sm:text-base">{comment.user}</p>
+                      <p className="text-xs sm:text-sm text-gray-500">
                         Section: {section.title}
                       </p>
                     </div>
-                    <Badge variant="outline" className="text-xs">
+                    <Badge variant="outline" className="text-xs mt-1 sm:mt-0 self-start">
                       {comment.resolved ? "Resolved" : "Open"}
                     </Badge>
                   </div>
-                  <p className="mb-2">{comment.text}</p>
+                  <p className="mb-2 text-sm sm:text-base">{comment.text}</p>
                   <div className="flex justify-between items-center text-xs text-gray-500">
                     <span>{comment.timestamp}</span>
-                    <Button variant="ghost" size="sm">
+                    <Button variant="ghost" size="sm" className="text-xs">
                       Resolve
                     </Button>
                   </div>
@@ -316,7 +331,7 @@ export default function ReportEditor() {
             )}
 
             {sections.flatMap((section) => section.comments).length === 0 && (
-              <div className="text-center py-8 text-gray-500">
+              <div className="text-center py-6 sm:py-8 text-gray-500">
                 <p>No comments yet.</p>
               </div>
             )}
