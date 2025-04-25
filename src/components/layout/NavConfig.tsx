@@ -24,6 +24,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import LinkIcon from "@mui/icons-material/Link";
+import { Children } from "react";
 
 // DASHBOARD SECTIONS
 export const DashboardSections = [

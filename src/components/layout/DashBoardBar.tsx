@@ -74,9 +74,9 @@ export default function ResponsiveDrawer(props: Props) {
   };
 
   const heading =
-    DashboardSections.flatMap((section) => section.items).find(
-      (item) => item.link === location.pathname
-    )?.Title || "Dashboard";
+  DashboardSections.find((section) =>
+    section.items.some((item) =>
+      item.link === location.pathname))?.heading || "Dashboard";
 
   const isSectionActive = (items) => {
     return items.some((item) => location.pathname === item.link);
@@ -274,8 +274,9 @@ export default function ResponsiveDrawer(props: Props) {
           flexGrow: 1,
           p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          backgroundColor: "#f5fafa", minHeight: "100vh",
-          overflowY: "auto",
+          backgroundColor: "#f5fafa",
+          minHeight: "100vh", 
+          overflowY: "auto",   
         }}
       >
         <Toolbar />

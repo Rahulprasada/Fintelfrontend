@@ -74,9 +74,12 @@ const App = () => (
             <Route path="equity-research-report">
               <Route index element={<EquityResearchReport />} />
               <Route path="newreport" element={<NewReportForm />} />
-              <Route path="equity-research-report/:id" element={<ReportEditor />} />
+              <Route path=":id" element={<ReportEditor />} />{" "}
             </Route>
-            <Route path="investment-agent-lab" element={<InvestmentAgentLab />} />
+            <Route
+              path="investment-agent-lab"
+              element={<InvestmentAgentLab />}
+            />
             <Route path="valuation-models" element={<ValuationModel />} />
             <Route
               path="business-promoter-analysis"

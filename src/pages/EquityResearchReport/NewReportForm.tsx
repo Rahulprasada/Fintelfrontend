@@ -13,7 +13,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { ArrowBigLeft } from "lucide-react";
+import { ArrowBigLeft, ChevronLeft} from "lucide-react";
 import BackGroundImage1 from "../../asset/cardbackground.jpg";
 
 type TemplateType = "standard" | "minimal" | "blank";
@@ -80,7 +80,7 @@ export default function NewReportForm() {
     }
 
     toast.success("Report created successfully!");
-    navigate("equity-research-report/1");
+    navigate("../1");
   };
 
   return (
@@ -101,13 +101,14 @@ export default function NewReportForm() {
               alignItems: "center",
             }}
           >
-            <ArrowBigLeft
+            <ChevronLeft
               size={25}
-              onClick={() => navigate(-1)}
+              onClick={() =>  navigate("/dashboard/equity-research-report")}
               cursor={"pointer"}
+              className="mr-2"
             />
-            <Divider />
-            <div className="col">
+            <Divider orientation="vertical" flexItem  />
+            <div className="col ml-4">
               <h1 className="text-2xl font-bold text-finance-blue">
                 Create New Report
               </h1>
