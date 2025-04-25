@@ -274,6 +274,8 @@ export default function ResponsiveDrawer(props: Props) {
           flexGrow: 1,
           p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
+          backgroundColor: "#f5fafa", minHeight: "100vh",
+          overflowY: "auto",
         }}
       >
         <Toolbar />
@@ -364,7 +366,7 @@ const SectionBox = styled(Box)`
 `;
 
 const SectionTitle = styled(Typography)`
-  color: #291699;
+  color: #281c6d;
   font-size: 14px;
   font-weight: 600;
   padding: 5px;
@@ -402,11 +404,15 @@ const NavItemBox = styled(Box, {
   }
 `;
 
-const AppBarTitle = styled(Typography)`
-  color: #1b0b38;
-  font-weight: 700;
-  font-size: 20px;
-`;
+const AppBarTitle = styled(Typography)(({ theme }) => ({
+  color: "#1b0b38",
+  fontWeight: 700,
+  fontSize: "20px",
+  display: "none",
+  [theme.breakpoints.up("sm")]: {
+    display: "block",
+  },
+}));
 
 const StyledAvatar = styled(Avatar)`
   background-color: #281c6d;

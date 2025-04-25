@@ -1,7 +1,12 @@
 import React from "react";
+import SearchReport from "./SearchReport";
 
 const EquityResearchReport = () => {
-  return <div>EquityResearchReport</div>;
+  return (
+    <div>
+      <SearchReport />
+    </div>
+  );
 };
 
 export default EquityResearchReport;
