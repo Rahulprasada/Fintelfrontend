@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Sparkles, MessageSquare } from "lucide-react";
+import { toast } from "sonner";
+import InsertContentToolbar from "./InsertContentToolBar";
 
 interface Comment {
   id: string;
@@ -33,6 +35,33 @@ export default function ReportSection({ section, onGenerate }: ReportSectionProp
     setIsGenerating(true);
     onGenerate();
     setTimeout(() => setIsGenerating(false), 1500);
+  };
+
+  const handleInsertChart = () => {
+    // In a real implementation, this would open a chart builder/selector
+    toast.info("Chart insertion coming soon!");
+  };
+
+  const handleInsertTable = () => {
+    // In a real implementation, this would open a table builder
+    const tableTemplate = `
+| Company    | Revenue (Cr) | Growth YoY |
+|------------|-------------|------------|
+| Infosys    | 38,200      | 4.8%       |
+| TCS        | 45,300      | 3.5%       |
+| Wipro      | 21,500      | 2.1%       |
+`;
+    setContent(prev => prev + "\n" + tableTemplate);
+  };
+
+  const handleFileUpload = (file: File) => {
+    if (file.type.startsWith('image/')) {
+      // In a real implementation, this would upload to a server and get a URL
+      toast.success(`Image ${file.name} will be added to the report`);
+    } else {
+      // For Excel files
+      toast.success(`File ${file.name} will be attached to the report`);
+    }
   };
 
   const statusColors: Record<string, string> = {
@@ -70,6 +99,12 @@ export default function ReportSection({ section, onGenerate }: ReportSectionProp
           </Button>
         </div>
       </div>
+
+      <InsertContentToolbar
+        onInsertChart={handleInsertChart}
+        onInsertTable={handleInsertTable}
+        onUploadFile={handleFileUpload}
+      />
       
       <Textarea
         value={content}
