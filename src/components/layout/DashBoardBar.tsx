@@ -70,7 +70,7 @@ export default function ResponsiveDrawer(props: Props) {
 
   const handleNavigation = (path: string) => {
     navigate(path);
-    setMobileOpen(!mobileOpen);
+    setMobileOpen(false);
   };
 
   const heading =
@@ -82,23 +82,15 @@ export default function ResponsiveDrawer(props: Props) {
     return items.some((item) => location.pathname === item.link);
   };
 
-  React.useEffect(() => {
-    if (isSectionActive(DashboardSections)) {
-      setExpandedSection("researchhub");
-    } else if (isSectionActive(DashboardSections)) {
-      setExpandedSection("quantengine");
-    } else if (isSectionActive(DashboardSections)) {
-      setExpandedSection("macromarketintelligence");
-    } else if (isSectionActive(DashboardSections)) {
-      setExpandedSection("esgintelligence");
-    } else if (isSectionActive(DashboardSections)) {
-      setExpandedSection("forensicreports");
-    } else if (isSectionActive(DashboardSections)) {
-      setExpandedSection("portfolioworkspace");
-    } else if (isSectionActive(DashboardSections)) {
-      setExpandedSection("toolssettings");
-    }
-  }, [location.pathname]);
+ React.useEffect(() => {
+  const activeSection = DashboardSections.find((section) =>
+    section.items.some((item) => location.pathname === item.link)
+  );
+
+  if (activeSection) {
+    setExpandedSection(activeSection.heading);
+  }
+}, [location.pathname]);
 
   const drawer = (
     <div className="flex flex-col h-full">
