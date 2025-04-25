@@ -44,6 +44,8 @@ import AlertManager from "./pages/AlertManager/Index";
 import UserRolePermission from "./pages/UserRolePermission/Index";
 import BrokerApiIntegration from "./pages/BrokerApiIntegration/Index";
 import EquityResearchReport from "./pages/EquityResearchReport/Index";
+import NewReportForm from "./pages/EquityResearchReport/NewReportForm";
+import ReportEditor from "./pages/EquityResearchReport/ReportEditor";
 
 const queryClient = new QueryClient();
 
@@ -69,36 +71,79 @@ const App = () => (
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/dashboard" element={<ResponsiveDrawer />}>
             <Route index element={<DashBoard />} />
-            <Route path="equity-research-report" element={<EquityResearchReport/>} />
+            <Route path="equity-research-report">
+              <Route index element={<EquityResearchReport />} />
+              <Route path="newreport" element={<NewReportForm />} />
+              <Route path="equity-research-report/:id" element={<ReportEditor />} />
+            </Route>
             <Route path="investment-agent-lab" element={<InvestmentAgentLab />} />
-            <Route path="valuation-models" element={<ValuationModel/>}/>
-            <Route path="business-promoter-analysis" element={<BusinessPromoterAnalysis/>}/>
-            <Route path="signal-generator"  element={<SignalGenerator/>}/>
-            <Route path="position-sizing" element={<PositionSizing/>}/>
-            <Route path="backtesting-optimization" element={<BackTestingOptimization/>}/>
-            <Route path="algorithmic-execution" element={<AlgorithmExecution/>} />
-            <Route path="macro-dashboard"  element={<MarcoDashboard/>}/>
-            <Route path="business-cycle-view"  element={<BusinessCycleView/>}/>
-            <Route path="fii-smart-money-tracker" element={<FiiSmartMoneyTracker/>}/>
-            <Route path="peer-esg-benchmarking" element={<BenchMarking/>}/>
-            <Route path="leadership-integrity-reports" element={<LeaderShipIntegrityReport/>}/>
-            <Route path="insider-related-party-activity" element={<InsiderRelatedPartyActivity/>}/>
-            <Route path="governance-red-flag-index" element={<GovernanceRedFlagIndex/>}/>
-            <Route path="watchlists-coverage-tracker" element={<WatchListCoverageTrackers/>}/>
-            <Route path="pm-review-approvals" element={<PMreviewApproval/>}/>
-            <Route path="research-archive-versioning" element={<ResearchArchivingVersioning/>}/>
-            <Route path="comments-feedback-center" element={<CommentFeedBackCenter/>}/>
-            <Route path="report-builder-settings" element={<ReportBuilderSetting/>}/>
-            <Route path="alert-manager" element={<AlertManager/>}/>
-            <Route path="user-roles-permissions" element={<UserRolePermission/>}/>
-            <Route path="broker-api-integrations" element={<BrokerApiIntegration/>}/>
+            <Route path="valuation-models" element={<ValuationModel />} />
+            <Route
+              path="business-promoter-analysis"
+              element={<BusinessPromoterAnalysis />}
+            />
+            <Route path="signal-generator" element={<SignalGenerator />} />
+            <Route path="position-sizing" element={<PositionSizing />} />
+            <Route
+              path="backtesting-optimization"
+              element={<BackTestingOptimization />}
+            />
+            <Route
+              path="algorithmic-execution"
+              element={<AlgorithmExecution />}
+            />
+            <Route path="macro-dashboard" element={<MarcoDashboard />} />
+            <Route path="business-cycle-view" element={<BusinessCycleView />} />
+            <Route
+              path="fii-smart-money-tracker"
+              element={<FiiSmartMoneyTracker />}
+            />
+            <Route path="peer-esg-benchmarking" element={<BenchMarking />} />
+            <Route
+              path="leadership-integrity-reports"
+              element={<LeaderShipIntegrityReport />}
+            />
+            <Route
+              path="insider-related-party-activity"
+              element={<InsiderRelatedPartyActivity />}
+            />
+            <Route
+              path="governance-red-flag-index"
+              element={<GovernanceRedFlagIndex />}
+            />
+            <Route
+              path="watchlists-coverage-tracker"
+              element={<WatchListCoverageTrackers />}
+            />
+            <Route path="pm-review-approvals" element={<PMreviewApproval />} />
+            <Route
+              path="research-archive-versioning"
+              element={<ResearchArchivingVersioning />}
+            />
+            <Route
+              path="comments-feedback-center"
+              element={<CommentFeedBackCenter />}
+            />
+            <Route
+              path="report-builder-settings"
+              element={<ReportBuilderSetting />}
+            />
+            <Route path="alert-manager" element={<AlertManager />} />
+            <Route
+              path="user-roles-permissions"
+              element={<UserRolePermission />}
+            />
+            <Route
+              path="broker-api-integrations"
+              element={<BrokerApiIntegration />}
+            />
             <Route
               path="esg-sustainability-analytics"
-              element={<Sustainability/>}
+              element={<Sustainability />}
             />
             <Route
               path="greenwashing-detection-flags"
-              element={<GreenWashingDetectionFlag/>}
+              element={<GreenWashingDetectionFlag />}
             />
             {/* Add more dashboard pages here */}
           </Route>
