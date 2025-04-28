@@ -46,6 +46,7 @@ import BrokerApiIntegration from "./pages/BrokerApiIntegration/Index";
 import EquityResearchReport from "./pages/EquityResearchReport/Index";
 import NewReportForm from "./pages/EquityResearchReport/NewReportForm";
 import ReportEditor from "./pages/EquityResearchReport/ReportEditor";
+import ScrollToTop from "./components/ui/Scroll";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +56,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+      <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/investment-reports" element={<InvestmentReports />} />

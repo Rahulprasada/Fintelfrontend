@@ -35,7 +35,7 @@ const dummyReports: Report[] = [
     sector: "IT Services",
     status: "draft",
     lastUpdated: "2 hours ago",
-    author: "Rohit Sharma",
+    author: "Venkatesh",
   },
   {
     id: "2",
@@ -46,7 +46,7 @@ const dummyReports: Report[] = [
     sector: "IT Services",
     status: "review",
     lastUpdated: "1 day ago",
-    author: "Sanjana Patel",
+    author: "Sanjana",
   },
   {
     id: "3",
@@ -57,7 +57,7 @@ const dummyReports: Report[] = [
     sector: "Banking",
     status: "approved",
     lastUpdated: "2 days ago",
-    author: "Vikram Desai",
+    author: "Vikram",
   },
   {
     id: "4",
@@ -68,7 +68,7 @@ const dummyReports: Report[] = [
     sector: "IT Services",
     status: "published",
     lastUpdated: "3 days ago",
-    author: "Rohit Sharma",
+    author: "Venkatesh",
   },
   {
     id: "5",
