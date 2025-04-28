@@ -61,6 +61,7 @@ export default function ResponsiveDrawer(props: Props) {
   };
 
   const handleClickOpen = () => {
+    console.log("open profile dialog box");
     setOpen(true);
   };
 
@@ -75,11 +76,11 @@ export default function ResponsiveDrawer(props: Props) {
 
   const heading =
   DashboardSections.find((section) =>
-    section.items.some((item) =>
-      item.link === location.pathname))?.heading || "Dashboard";
+    section.items.some(item =>
+       location.pathname.startsWith(item.link)))?.heading || "Dashboard";
 
   const isSectionActive = (items) => {
-    return items.some((item) => location.pathname === item.link);
+    return items.some(item => location.pathname === item.link);
   };
 
  React.useEffect(() => {
@@ -136,7 +137,7 @@ export default function ResponsiveDrawer(props: Props) {
                 unmountOnExit
               >
                 {section.items.map((item, itemIndex) => {
-                  const isActive = location.pathname === item.link;
+                  const isActive = location.pathname.startsWith(item.link);
                   return (
                     <ListItem key={itemIndex} disablePadding>
                       <NavItemBox isActive={isActive}>
@@ -266,7 +267,8 @@ export default function ResponsiveDrawer(props: Props) {
           flexGrow: 1,
           p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          backgroundColor: "#f5fafa",
+          // backgroundColor: "#f5fafa",
+          backgroundColor: "#f7f7f8",
           minHeight: "100vh", 
           overflowY: "auto",   
         }}
