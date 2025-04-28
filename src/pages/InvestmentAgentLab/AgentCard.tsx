@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/dialog";
 import { Check, Star } from "lucide-react";
 import { Agent } from "./Agent";
-import  cardBackground  from "../../asset/cardbackground.jpg";
+import cardBackground from "../../asset/cardbackground.jpg";
 
 interface AgentCardProps {
   agent: Agent;
@@ -38,11 +38,11 @@ export default function AgentCard({
         className={`group cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-[1.02] ${
           isSelected ? "ring-2 ring-primary shadow-lg" : ""
         }`}
-          style={{
-                backgroundImage: `url(${cardBackground})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
+        style={{
+          backgroundImage: `url(${cardBackground})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
       >
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
@@ -86,7 +86,7 @@ export default function AgentCard({
               e.stopPropagation();
               setShowProfile(true);
             }}
-        //   className="hover:bg-blue-50 text-blue-700"
+            //   className="hover:bg-blue-50 text-blue-700"
           >
             View Profile
           </Button>

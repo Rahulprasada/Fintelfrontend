@@ -61,7 +61,7 @@ export default function InvestmentAgentLab() {
     }
     localStorage.setItem("selectedAgentIds", JSON.stringify(selectedAgentIds));
     toast.success(`${selectedAgentIds.length} agent(s) selected. Ready for signal generation.`);
-    navigate("/");
+    // navigate("/");
   };
 
   return (

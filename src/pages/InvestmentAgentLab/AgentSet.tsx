@@ -10,6 +10,15 @@ import {
 import { toast } from "sonner";
 import { Check, Trash } from "lucide-react";
 import { Agent, AgentSet } from "./Agent";
+import { useState } from "react";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 interface AgentSetsProps {
   agentSets: AgentSet[];
@@ -27,13 +36,24 @@ export default function AgentSets({
   if (agentSets.length === 0) {
     return null;
   }
+  const [currentPage, setCurrentPage] = useState(1);
+  const cardsPerPage = 3;
+
+  const indexOfLastCard = currentPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  const currentAgents = agentSets.slice(indexOfFirstCard, indexOfLastCard);
+  const totalPages = Math.ceil(agentSets.length / cardsPerPage);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
 
   return (
-    <div className="p-6">
-      <h3 className="text-lg font-medium mb-4">Saved Agent Sets</h3>
-
+    <div className="p-6 justify-center items-center">
+      <h3 className="text-lg font-bold mb-4">Saved Agent Sets</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {agentSets.map((set) => {
+        {currentAgents.map((set) => {
           const setAgents = agents.filter((a) => set.agentIds.includes(a.id));
 
           return (
@@ -41,7 +61,7 @@ export default function AgentSets({
               key={set.id}
               className="group hover:shadow-md transition-shadow"
               style={{
-                backgroundImage: "linear-gradient(to right, #e0f2fe, #ffffff)", 
+                backgroundImage: "linear-gradient(to right, #e0f2fe, #ffffff)",
               }}
             >
               <CardHeader className="pb-2">
@@ -102,6 +122,43 @@ export default function AgentSets({
           );
         })}
       </div>
+      {totalPages > 1 && (
+          <Pagination className="flex justify-center mt-4">
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.max(prev - 1, 1))
+                  }
+                  className="cursor-pointer"
+                  aria-disabled={currentPage === 1}
+                />
+              </PaginationItem>
+
+              {pageNumbers.map((number) => (
+                <PaginationItem key={number}>
+                  <PaginationLink
+                    className="cursor-pointer"
+                    isActive={currentPage === number}
+                    onClick={() => setCurrentPage(number)}
+                  >
+                    {number}
+                  </PaginationLink>
+                </PaginationItem>
+              ))}
+
+              <PaginationItem>
+                <PaginationNext
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                  }
+                  className="cursor-pointer"
+                  aria-disabled={currentPage === totalPages}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+      )}
     </div>
   );
 }

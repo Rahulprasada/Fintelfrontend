@@ -23,9 +23,9 @@ import FeedbackIcon from "@mui/icons-material/Feedback";
 import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
-import LinkIcon from "@mui/icons-material/Link";
-import { Children } from "react";
-
+import LinkIcon from "@mui/icons-material/Link"; 
+import ManageSearchIcon from "@mui/icons-material/ManageSearch";
+import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 // DASHBOARD SECTIONS
 export const DashboardSections = [
   {
@@ -118,6 +118,27 @@ export const DashboardSections = [
       },
     ],
   },
+  {
+    heading: "Forensic Reports (Premium)",
+    items: [
+      {
+        Title: "Leadership Integrity Reports",
+        link: "/dashboard/leadership-integrity-reports",
+        icon: <SupervisorAccountIcon />,
+      },
+      {
+        Title: "Insider & Related Party Activity",
+        link: "/dashboard/insider-related-party-activity",
+        icon: <ManageSearchIcon />,
+      },
+      {
+        Title: "Governance Red Flag Index",
+        link: "/dashboard/governance-red-flag-index",
+        icon: <ReportProblemIcon />,
+      },
+    ],
+  }
+  ,
   {
     heading: "Governance & Integrity",
     items: [
