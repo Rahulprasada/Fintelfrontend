@@ -17,9 +17,12 @@ export default function InsertContentToolbar({
     const file = event.target.files?.[0];
     if (!file) return;
 
-    // For now, we'll accept common image formats and Excel files
-    const allowedTypes = ['image/jpeg', 'image/png', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
-    
+    const allowedTypes = [
+      "image/jpeg",
+      "image/png",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    ];
+
     if (!allowedTypes.includes(file.type)) {
       toast.error("Please upload an image or Excel file");
       return;
@@ -29,17 +32,17 @@ export default function InsertContentToolbar({
   };
 
   return (
-    <div className="flex justify-end mb-4 gap-2">
-      <Button variant="outline" size="sm" onClick={onInsertChart}>
+    <div className="flex flex-col sm:flex-row sm:justify-end items-stretch sm:items-center gap-2 mb-4">
+      <Button variant="outline" size="sm" onClick={onInsertChart} className="w-full sm:w-auto">
         <BarChart size={14} className="mr-2" />
         Add Chart
       </Button>
-      <Button variant="outline" size="sm" onClick={onInsertTable}>
+      <Button variant="outline" size="sm" onClick={onInsertTable} className="w-full sm:w-auto">
         <Table size={14} className="mr-2" />
         Insert Table
       </Button>
-      <Button variant="outline" size="sm" asChild>
-        <label className="cursor-pointer">
+      <Button variant="outline" size="sm" asChild className="w-full sm:w-auto">
+        <label className="cursor-pointer flex items-center justify-center w-full">
           <Upload size={14} className="mr-2" />
           Upload File
           <input

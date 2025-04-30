@@ -28,6 +28,7 @@ import {
   Table,
   BarChart,
   Sparkles,
+  MoreVertical,
 } from "lucide-react";
 import ReportSection from "./ReportSection";
 import ExportOptions from "./ExportOption";
@@ -94,6 +95,7 @@ export default function ReportEditor() {
   const navigate = useNavigate();
   const [sections, setSections] = useState(mockSections);
   const [activeTab, setActiveTab] = useState("edit");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleSaveDraft = () => {
     toast.success("Draft saved successfully");
@@ -139,10 +141,48 @@ export default function ReportEditor() {
     }, 1500);
   };
 
+  // Mobile action menu component
+  const MobileActionMenu = () => (
+    <DropdownMenu open={menuOpen} onOpenChange={setMenuOpen}>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" size="icon" className="md:hidden">
+          <MoreVertical size={16} />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-56">
+        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuItem onClick={handleSaveDraft}>
+            <Save size={16} className="mr-2" />
+            Save Draft
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={handleSubmitForReview}>
+            <Send size={16} className="mr-2" />
+            Submit for Review
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Download size={16} className="mr-2" />
+            Export
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>
+            <MessagesSquare size={16} className="mr-2" />
+            View Comments
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <History size={16} className="mr-2" />
+            Version History
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-full max-w-full">
       <div
-        className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 bg-slate-200 p-3 sm:p-4 rounded-lg gap-4"
+        className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 bg-slate-200 p-3 sm:p-4 rounded-lg gap-2 sm:gap-4"
         style={{
           backgroundImage: `url(${BackGroundImage1})`,
           backgroundSize: "cover",
@@ -155,16 +195,16 @@ export default function ReportEditor() {
               size={20}
               onClick={() => navigate(-1)}
               cursor={"pointer"}
-              className="mr-1"
+              className="flex-shrink-0"
             />
           </div>
-          <Divider orientation="vertical" flexItem />
-          <div className="w-full sm:w-auto">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-              <h1 className="text-xl sm:text-2xl font-bold truncate">
+          <Divider orientation="vertical" flexItem className="hidden sm:block" />
+          <div className="w-full sm:w-auto overflow-hidden">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+              <h1 className="text-lg sm:text-xl md:text-2xl font-bold truncate">
                 Q4 FY25 Earnings Update
               </h1>
-              <Badge variant="outline" className="self-start sm:self-auto">
+              <Badge variant="outline" className="self-start sm:self-auto whitespace-nowrap">
                 Draft
               </Badge>
             </div>
@@ -177,21 +217,34 @@ export default function ReportEditor() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" onClick={handleSaveDraft}>
-            <Save size={16} className="mr-2" />
+        {/* Mobile action button */}
+        <div className="flex items-center sm:hidden ml-auto">
+          <MobileActionMenu />
+        </div>
+
+        {/* Desktop action buttons */}
+        <div className="hidden sm:flex md:items-center gap-2 flex-wrap justify-end">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={handleSaveDraft}
+            className="whitespace-nowrap"
+          >
+            <Save size={16} className="mr-2 hidden sm:inline" />
             Save Draft
           </Button>
 
-          <ExportOptions reportId={id} reportTitle="Q4 FY25 Earnings Update" />
+          <div className="hidden md:block">
+            <ExportOptions reportId={id} reportTitle="Q4 FY25 Earnings Update" />
+          </div>
 
           <Button
             size="sm"
-            className="bg-finance-blue hover:bg-blue-800"
+            className="bg-finance-blue hover:bg-blue-800 whitespace-nowrap"
             onClick={handleSubmitForReview}
           >
-            <Send size={16} className="mr-2" />
-            Submit for Review
+            <Send size={16} className="mr-2 hidden sm:inline" />
+            Submit
           </Button>
 
           <DropdownMenu>
@@ -204,6 +257,10 @@ export default function ReportEditor() {
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
+                <DropdownMenuItem className="md:hidden">
+                  <Download size={16} className="mr-2" />
+                  Export
+                </DropdownMenuItem>
                 <DropdownMenuItem>
                   <MessagesSquare size={16} className="mr-2" />
                   View Comments
@@ -223,33 +280,34 @@ export default function ReportEditor() {
         onValueChange={setActiveTab}
         className="flex-1 flex flex-col"
       >
-        <div className="bg-white border rounded-t-lg">
-          <div className="flex items-center justify-between border-b">
-            <TabsList className="flex rounded-none bg-transparent p-0">
+        <div className="bg-white border rounded-t-lg overflow-hidden">
+          <div className="flex items-center justify-between border-b overflow-x-auto">
+            <TabsList className="flex rounded-none bg-transparent p-0 min-w-0">
               <TabsTrigger
                 value="edit"
-                className="rounded-none border-b-2 border-transparent data-[state=active]:border-finance-blue data-[state=active]:bg-white px-2 py-2"
+                className="rounded-none border-b-2 border-transparent data-[state=active]:border-finance-blue data-[state=active]:bg-white px-2 py-2 text-sm"
               >
                 Editor
               </TabsTrigger>
               <TabsTrigger
                 value="preview"
-                className="rounded-none border-b-2 border-transparent data-[state=active]:border-finance-blue data-[state=active]:bg-white px-2 py-2"
+                className="rounded-none border-b-2 border-transparent data-[state=active]:border-finance-blue data-[state=active]:bg-white px-2 py-2 text-sm"
               >
                 Preview
               </TabsTrigger>
               <TabsTrigger
                 value="comments"
-                className="rounded-none border-b-2 border-transparent data-[state=active]:border-finance-blue data-[state=active]:bg-white px-2 py-2"
+                className="rounded-none border-b-2 border-transparent data-[state=active]:border-finance-blue data-[state=active]:bg-white px-2 py-2 text-sm"
               >
                 Comments
               </TabsTrigger>
             </TabsList>
             {activeTab === "edit" && (
-              <div className="mr-1">
-                <Button variant="outline" size="sm" onClick={handleAddSection}>
-                  <PlusCircle size={14} className="mr-2" />
-                  Add Section
+              <div className="mr-1 flex-shrink-0">
+                <Button variant="outline" size="sm" onClick={handleAddSection} className="whitespace-nowrap">
+                  <PlusCircle size={14} className="mr-1 sm:mr-2" />
+                  <span className="hidden xs:inline">Add Section</span>
+                  <span className="xs:hidden">Add</span>
                 </Button>
               </div>
             )}
@@ -258,12 +316,12 @@ export default function ReportEditor() {
 
         <TabsContent
           value="edit"
-          className="flex-1 overflow-auto mt-0 bg-white border border-t-0 rounded-b-lg p-6"
+          className="flex-1 overflow-auto mt-0 bg-white border border-t-0 rounded-b-lg p-4 sm:p-6"
         >
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {sections.map((section, idx) => (
               <div key={section.id}>
-                {idx > 0 && <Separator className="my-8" />}
+                {idx > 0 && <Separator className="my-6 sm:my-8" />}
                 <ReportSection
                   section={section}
                   onGenerate={() => generateSection(section.id)}
@@ -275,21 +333,21 @@ export default function ReportEditor() {
 
         <TabsContent
           value="preview"
-          className="flex-1 overflow-auto mt-0 bg-white border border-t-0 rounded-b-lg p-8"
+          className="flex-1 overflow-auto mt-0 bg-white border border-t-0 rounded-b-lg p-4 sm:p-6 md:p-8"
         >
           <div className="max-w-4xl mx-auto editor-content">
-            <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold mb-2">
+            <div className="text-center mb-6 sm:mb-8">
+              <h1 className="text-2xl sm:text-3xl font-bold mb-2">
                 Q4 FY25 Earnings Update
               </h1>
-              <p className="text-xl">Infosys Ltd (INFY.NS)</p>
+              <p className="text-lg sm:text-xl">Infosys Ltd (INFY.NS)</p>
               <p className="text-gray-500">April 23, 2025</p>
             </div>
 
             {sections.map((section, idx) => (
-              <div key={section.id} className="mb-6">
-                <h2 className="text-xl font-bold mb-3">{section.title}</h2>
-                <p>{section.content}</p>
+              <div key={section.id} className="mb-4 sm:mb-6">
+                <h2 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3">{section.title}</h2>
+                <p className="text-sm sm:text-base">{section.content}</p>
               </div>
             ))}
           </div>
@@ -297,32 +355,32 @@ export default function ReportEditor() {
 
         <TabsContent
           value="comments"
-          className="flex-1 overflow-auto mt-0 bg-white border border-t-0 rounded-b-lg p-6"
+          className="flex-1 overflow-auto mt-0 bg-white border border-t-0 rounded-b-lg p-4 sm:p-6"
         >
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             <h3 className="font-semibold">All Comments</h3>
 
             {sections.flatMap((section) =>
               section.comments.map((comment) => (
                 <div
                   key={comment.id}
-                  className="bg-gray-50 border rounded-lg p-4"
+                  className="bg-gray-50 border rounded-lg p-3 sm:p-4"
                 >
-                  <div className="flex justify-between items-start mb-2">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-2">
                     <div>
                       <p className="font-medium">{comment.user}</p>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-xs sm:text-sm text-gray-500">
                         Section: {section.title}
                       </p>
                     </div>
-                    <Badge variant="outline" className="text-xs">
+                    <Badge variant="outline" className="text-xs self-start">
                       {comment.resolved ? "Resolved" : "Open"}
                     </Badge>
                   </div>
-                  <p className="mb-2">{comment.text}</p>
+                  <p className="text-sm mb-2">{comment.text}</p>
                   <div className="flex justify-between items-center text-xs text-gray-500">
                     <span>{comment.timestamp}</span>
-                    <Button variant="ghost" size="sm">
+                    <Button variant="ghost" size="sm" className="text-xs py-1 px-2 h-auto">
                       Resolve
                     </Button>
                   </div>
@@ -331,7 +389,7 @@ export default function ReportEditor() {
             )}
 
             {sections.flatMap((section) => section.comments).length === 0 && (
-              <div className="text-center py-8 text-gray-500">
+              <div className="text-center py-6 sm:py-8 text-gray-500">
                 <p>No comments yet.</p>
               </div>
             )}

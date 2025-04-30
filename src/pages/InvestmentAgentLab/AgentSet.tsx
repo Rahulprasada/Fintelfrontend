@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { toast } from "sonner";
-import { Check, Trash } from "lucide-react";
+import { Check, ChevronLeft, ChevronRight, Trash } from "lucide-react";
 import { Agent, AgentSet } from "./Agent";
 import { useState } from "react";
 import {
@@ -48,6 +48,16 @@ export default function AgentSets({
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
   }
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   return (
     <div className="p-6 justify-center items-center">
@@ -123,41 +133,34 @@ export default function AgentSets({
         })}
       </div>
       {totalPages > 1 && (
-          <Pagination className="flex justify-center mt-4">
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious
-                  onClick={() =>
-                    setCurrentPage((prev) => Math.max(prev - 1, 1))
-                  }
-                  className="cursor-pointer"
-                  aria-disabled={currentPage === 1}
-                />
-              </PaginationItem>
-
-              {pageNumbers.map((number) => (
-                <PaginationItem key={number}>
-                  <PaginationLink
-                    className="cursor-pointer"
-                    isActive={currentPage === number}
-                    onClick={() => setCurrentPage(number)}
-                  >
-                    {number}
-                  </PaginationLink>
-                </PaginationItem>
-              ))}
-
-              <PaginationItem>
-                <PaginationNext
-                  onClick={() =>
-                    setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-                  }
-                  className="cursor-pointer"
-                  aria-disabled={currentPage === totalPages}
-                />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
+        <div className="flex justify-between items-center mt-4">
+          <div className="text-sm text-muted-foreground">
+            Showing {indexOfFirstCard + 1}-
+            {Math.min(indexOfLastCard, agentSets.length)} of {agentSets.length}{" "}
+            models
+          </div>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={prevPage}
+              disabled={currentPage === 1}
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            <div className="text-sm px-2">
+              Page {currentPage} of {totalPages}
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={nextPage}
+              disabled={currentPage === totalPages}
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
       )}
     </div>
   );

@@ -38,12 +38,10 @@ export default function ReportSection({ section, onGenerate }: ReportSectionProp
   };
 
   const handleInsertChart = () => {
-    // In a real implementation, this would open a chart builder/selector
     toast.info("Chart insertion coming soon!");
   };
 
   const handleInsertTable = () => {
-    // In a real implementation, this would open a table builder
     const tableTemplate = `
 | Company    | Revenue (Cr) | Growth YoY |
 |------------|-------------|------------|
@@ -56,10 +54,8 @@ export default function ReportSection({ section, onGenerate }: ReportSectionProp
 
   const handleFileUpload = (file: File) => {
     if (file.type.startsWith('image/')) {
-      // In a real implementation, this would upload to a server and get a URL
       toast.success(`Image ${file.name} will be added to the report`);
     } else {
-      // For Excel files
       toast.success(`File ${file.name} will be attached to the report`);
     }
   };
@@ -71,26 +67,26 @@ export default function ReportSection({ section, onGenerate }: ReportSectionProp
   };
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center space-x-3">
+    <div className="space-y-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3">
           <h3 className="font-semibold text-lg">{section.title}</h3>
           <Badge className={statusColors[section.status] || ""}>
             {section.status.charAt(0).toUpperCase() + section.status.slice(1)}
           </Badge>
         </div>
-        
-        <div className="flex items-center gap-2">
+
+        <div className="flex flex-wrap items-center gap-2">
           {section.comments.length > 0 && (
             <Button variant="ghost" size="sm" className="text-finance-gray">
               <MessageSquare size={16} className="mr-1" />
               {section.comments.length}
             </Button>
           )}
-          
-          <Button 
-            variant="outline" 
-            size="sm" 
+
+          <Button
+            variant="outline"
+            size="sm"
             onClick={handleGenerate}
             disabled={isGenerating}
           >
@@ -105,7 +101,7 @@ export default function ReportSection({ section, onGenerate }: ReportSectionProp
         onInsertTable={handleInsertTable}
         onUploadFile={handleFileUpload}
       />
-      
+
       <Textarea
         value={content}
         onChange={(e) => setContent(e.target.value)}
