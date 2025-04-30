@@ -15,7 +15,7 @@ import Legal from "./pages/Legal";
 import About from "./pages/About";
 import Career from "./pages/Career";
 import Pricing from "./pages/Pricing";
-import Login from "./pages/Login";
+import Login from "@/pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResponsiveDrawer from "./components/layout/DashBoardBar";
 import DashBoard from "./pages/Dashboard/Index";
