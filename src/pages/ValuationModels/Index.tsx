@@ -1,11 +1,13 @@
 import React from 'react'
+import ValuationModelsPage from './ValuationModelsPage'
 
-const ValuationModel = () => {
+const Valuation = () => {
   return (
     <div>
-      ValuationModel
+      <ValuationModelsPage/>
     </div>
   )
 }
 
-export default ValuationModel
+export default Valuation
+

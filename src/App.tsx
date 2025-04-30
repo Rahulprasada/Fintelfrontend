@@ -20,7 +20,6 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResponsiveDrawer from "./components/layout/DashBoardBar";
 import DashBoard from "./pages/Dashboard/Index";
 import InvestmentAgentLab from "./pages/InvestmentAgentLab/Index";
-import ValuationModel from "./pages/ValuationModels/Index";
 import BusinessPromoterAnalysis from "./pages/BussinessPromotersAnalysis/Index";
 import SignalGenerator from "./pages/SignalGenerator/SignalGenerator";
 import PositionSizing from "./pages/PositionSizing/Index";
@@ -47,6 +46,9 @@ import EquityResearchReport from "./pages/EquityResearchReport/Index";
 import NewReportForm from "./pages/EquityResearchReport/NewReportForm";
 import ReportEditor from "./pages/EquityResearchReport/ReportEditor";
 import ScrollToTop from "./components/ui/Scroll";
+import Valuation from "./pages/ValuationModels/Index";
+import ValuationModelsPage from "./pages/ValuationModels/ValuationModelsPage";
+import ValuationModelEditorPage from "./pages/ValuationModels/ValuationModelEditorPage";
 
 const queryClient = new QueryClient();
 
@@ -82,7 +84,11 @@ const App = () => (
               path="investment-agent-lab"
               element={<InvestmentAgentLab />}
             />
-            <Route path="valuation-models" element={<ValuationModel />} />
+            <Route path="valuation-models" >
+            <Route index element={<Valuation />}/>
+            <Route path="valuation" element={<ValuationModelsPage />} />
+            <Route path=":id" element={<ValuationModelEditorPage />} />
+            </Route>
             <Route
               path="business-promoter-analysis"
               element={<BusinessPromoterAnalysis />}

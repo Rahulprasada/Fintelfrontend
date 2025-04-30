@@ -1,6 +1,6 @@
 import { useState } from "react";
 import AgentCard from "./AgentCard";
-import { Search, Plus } from "lucide-react";
+import { Search, Plus, ChevronLeft, ChevronRight } from "lucide-react";
 import {
   Command,
   CommandEmpty,
@@ -61,6 +61,17 @@ export default function AgentList({
   const handleAddAgent = (newAgent: Agent) => {
     setCurrentPage(1);
     setAgents((prev) => [newAgent, ...prev]);
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
   };
 
   const indexOfLastCard = currentPage * cardsPerPage;
@@ -156,39 +167,34 @@ export default function AgentList({
         </div>
       )}
       {totalPages > 1 && (
-        <Pagination className="justify-center">
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                className="cursor-pointer"
-                aria-disabled={currentPage === 1}
-              />
-            </PaginationItem>
-
-            {pageNumbers.map((number) => (
-              <PaginationItem key={number}>
-                <PaginationLink
-                  className="cursor-pointer"
-                  isActive={currentPage === number}
-                  onClick={() => setCurrentPage(number)}
-                >
-                  {number}
-                </PaginationLink>
-              </PaginationItem>
-            ))}
-
-            <PaginationItem>
-              <PaginationNext
-                onClick={() =>
-                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-                }
-                className="cursor-pointer"
-                aria-disabled={currentPage === totalPages}
-              />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
+        <div className="flex justify-between items-center mt-4">
+          <div className="text-sm text-muted-foreground">
+            Showing {indexOfFirstCard + 1}-
+            {Math.min(indexOfLastCard, filteredAgents.length)} of{" "}
+            {filteredAgents.length} models
+          </div>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={prevPage}
+              disabled={currentPage === 1}
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            <div className="text-sm px-2">
+              Page {currentPage} of {totalPages}
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={nextPage}
+              disabled={currentPage === totalPages}
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
       )}
       <AddAgentDialog
         open={showModal}

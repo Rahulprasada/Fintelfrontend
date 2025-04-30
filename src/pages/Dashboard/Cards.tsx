@@ -1,4 +1,4 @@
-import { Card, styled, Box, Typography } from '@mui/material';
+import { Card, styled, Box, Typography, useTheme } from '@mui/material';
 import LineChart from './Chart';
 import { chartData } from '../../components/ui/ChartData';
 
@@ -9,12 +9,11 @@ const Model = [
 ];
 
 const Cards = () => {
+  const theme = useTheme();
+
   return (
     <MainCard>
-      {/* <Typography sx={{ color: "#1e134e", fontSize: "22px", fontWeight: "700", mb: 2 }}>
-      Equity Research Reports
-      </Typography> */}
-      <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" gap={2} width="100%">
+      <ResponsiveGrid>
         {Model.map((item, index) => (
           <CardBox key={index}>
             <Typography variant="body2" sx={{ fontWeight: 600, fontSize: "14px", color: "#726d6d" }}>
@@ -25,10 +24,11 @@ const Cards = () => {
             </Typography>
           </CardBox>
         ))}
+      </ResponsiveGrid>
+
+      <Box sx={{ width: '100%', mt: 3 }}>
+        <LineChart data={chartData} height={300} />
       </Box>
-      <LineChart
-       data={chartData} 
-       height={300} />
     </MainCard>
   );
 };
@@ -36,19 +36,37 @@ const Cards = () => {
 export default Cards;
 
 // Styled Components
-const MainCard = styled(Card)`
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-`;
+const MainCard = styled(Card)(({ theme }) => ({
+  padding: 20,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  justifyContent: 'center',
+  boxSizing: 'border-box',
+  width: '100%',
+}));
 
-const CardBox = styled(Box)`
-  padding: 16px;
-  background-color: #f7f7f8;
-  color: #3a3a3b;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-`;
+const ResponsiveGrid = styled(Box)(({ theme }) => ({
+  display: 'grid',
+  gap: theme.spacing(2),
+  width: '100%',
+  gridTemplateColumns: 'repeat(3, 1fr)',
+
+  [theme.breakpoints.down('md')]: {
+    gridTemplateColumns: 'repeat(2, 1fr)',
+  },
+
+  [theme.breakpoints.down('sm')]: {
+    gridTemplateColumns: '1fr',
+  },
+}));
+
+const CardBox = styled(Box)(({ theme }) => ({
+  padding: 16,
+  backgroundColor: '#f7f7f8',
+  color: '#3a3a3b',
+  borderRadius: 8,
+  display: 'flex',
+  flexDirection: 'column',
+  boxSizing: 'border-box',
+}));
