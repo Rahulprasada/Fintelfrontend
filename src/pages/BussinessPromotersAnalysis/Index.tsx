@@ -1,9 +1,10 @@
 import React from 'react'
+import BusinessAnalysisPage from './BusinessAnalysisPage'
 
 const BusinessPromoterAnalysis = () => {
   return (
     <div>
-      BusinessPromoterAnalysis
+      <BusinessAnalysisPage/>
     </div>
   )
 }
