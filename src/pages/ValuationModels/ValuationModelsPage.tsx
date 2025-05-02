@@ -270,7 +270,19 @@ export default function ValuationModelsPage() {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredModels.slice(indexOfFirstItem, indexOfLastItem);
+ 
+  // Pagination controls
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
   // Reset to first page when filters change
   useEffect(() => {
     setCurrentPage(1);
@@ -290,19 +302,6 @@ export default function ValuationModelsPage() {
     setFilterSector("all");
     setFilterType("all");
     setCurrentPage(1);
-  };
-
-  // Pagination controls
-  const nextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const prevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
   };
 
   // Handle sector filter change

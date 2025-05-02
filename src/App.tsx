@@ -49,6 +49,9 @@ import ScrollToTop from "./components/ui/Scroll";
 import Valuation from "./pages/ValuationModels/Index";
 import ValuationModelsPage from "./pages/ValuationModels/ValuationModelsPage";
 import ValuationModelEditorPage from "./pages/ValuationModels/ValuationModelEditorPage";
+import BusinessAnalysisPage from "./pages/BussinessPromotersAnalysis/BusinessAnalysisPage";
+import BusinessAnalysisEditorPage from "./pages/BussinessPromotersAnalysis/BusinessAnalysisEditor";
+import NewBusinessAnalysisPage from "./pages/BussinessPromotersAnalysis/NewBusinessAnalysis";
 
 const queryClient = new QueryClient();
 
@@ -89,10 +92,12 @@ const App = () => (
             <Route path="valuation" element={<ValuationModelsPage />} />
             <Route path=":id" element={<ValuationModelEditorPage />} />
             </Route>
-            <Route
-              path="business-promoter-analysis"
-              element={<BusinessPromoterAnalysis />}
-            />
+            <Route path="business-promoter-analysis">
+            <Route index element={<BusinessPromoterAnalysis />}/>
+             <Route path="business-analysis" element={<BusinessAnalysisPage />} />
+             <Route path="new" element={<NewBusinessAnalysisPage />} />
+             <Route path=":id" element={<BusinessAnalysisEditorPage />} />
+             </Route>
             <Route path="signal-generator" element={<SignalGenerator />} />
             <Route path="position-sizing" element={<PositionSizing />} />
             <Route
