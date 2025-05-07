@@ -107,7 +107,7 @@ export default function NewBusinessAnalysisPage() {
   return (
     <div>
       <div className="space-y-6">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 p-4"
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 p-4 rounded-lg"
          style={{
             backgroundImage: `url(${BackGroundImage1})`,
             backgroundSize: "cover",
@@ -133,8 +133,8 @@ export default function NewBusinessAnalysisPage() {
         <Separator className="my-6" />
         
         <div className="grid md:grid-cols-2 gap-8">
-          <Card className="border-t-4 border-t-finance-purple">
-            <CardHeader>
+          <Card className="border-t-4 border-t-purple-400 bg-white shadow-md">
+            <CardHeader className="bg-purple-100 p-6 m-1 rounded-lg">
               <CardTitle>Select Company</CardTitle>
               <CardDescription>
                 Choose the company you want to analyze
@@ -192,8 +192,8 @@ export default function NewBusinessAnalysisPage() {
           </Card>
           
           <Card>
-            <CardHeader>
-              <CardTitle>What you'll be analyzing</CardTitle>
+            <CardHeader className="bg-green-100 p-6">
+              <CardTitle >What you'll be analyzing</CardTitle>
               <CardDescription>
                 Business & Promoter Analysis components
               </CardDescription>
