@@ -21,9 +21,7 @@ import ResponsiveDrawer from "./components/layout/DashBoardBar";
 import DashBoard from "./pages/Dashboard/Index";
 import InvestmentAgentLab from "./pages/InvestmentAgentLab/Index";
 import BusinessPromoterAnalysis from "./pages/BussinessPromotersAnalysis/Index";
-import SignalGenerator from "./pages/SignalGenerator/SignalGenerator";
 import PositionSizing from "./pages/PositionSizing/Index";
-import BackTestingOptimization from "./pages/BackTestingOptimization/Index";
 import AlgorithmExecution from "./pages/AlgorithmExcecution/Index";
 import MarcoDashboard from "./pages/MarcoDashboard/Index";
 import BusinessCycleView from "./pages/BusinessCycleView/Index";
@@ -52,6 +50,8 @@ import ValuationModelEditorPage from "./pages/ValuationModels/ValuationModelEdit
 import BusinessAnalysisPage from "./pages/BussinessPromotersAnalysis/BusinessAnalysisPage";
 import BusinessAnalysisEditorPage from "./pages/BussinessPromotersAnalysis/BusinessAnalysisEditor";
 import NewBusinessAnalysisPage from "./pages/BussinessPromotersAnalysis/NewBusinessAnalysis";
+import SignalGenerator from "./pages/SignalGenerator/Index";
+import BackTestingOptimization from "./pages/BackTestingOptimization/Index";
 
 const queryClient = new QueryClient();
 

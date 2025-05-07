@@ -43,8 +43,8 @@ export function ProfileDialogBox(props: ProfileDialogBoxProps) {
         </Box>
         <Divider />
         <Box sx={{ display: "flex", flexDirection: "row", p: 2 ,cursor:"pointer" }}  onClick={handleClickLog}>
-          <LogoutIcon />&nbsp;&nbsp;
-          <Typography>Log Out</Typography>
+          <LogoutIcon style={{color:"red"}}/>&nbsp;&nbsp;
+          <Typography sx={{color:"red"}}>Log Out</Typography>
         </Box>
       </Box>
     </Popover>

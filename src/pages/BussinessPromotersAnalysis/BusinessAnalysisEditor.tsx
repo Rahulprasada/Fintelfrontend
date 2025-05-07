@@ -80,7 +80,7 @@ export default function BusinessAnalysisEditorPage() {
                 <ChevronLeft className="h-4 w-4" />
               </Button>
             </Link>
-            <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-finance-blue to-finance-purple bg-clip-text text-transparent">
+            <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-finance-blue to-finance-purple bg-clip-text">
               {analysis.companyName}
             </h1>
           </div>
