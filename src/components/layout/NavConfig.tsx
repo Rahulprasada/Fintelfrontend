@@ -13,9 +13,6 @@ import TrackChangesIcon from "@mui/icons-material/TrackChanges";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 import FlagIcon from "@mui/icons-material/Flag";
 import CompareIcon from "@mui/icons-material/Compare";
-import HowToRegIcon from "@mui/icons-material/HowToReg";
-import GroupIcon from "@mui/icons-material/Group";
-import GavelIcon from "@mui/icons-material/Gavel";
 import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 import ReviewsIcon from "@mui/icons-material/Reviews";
 import ArchiveIcon from "@mui/icons-material/Archive";
@@ -26,6 +23,7 @@ import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import LinkIcon from "@mui/icons-material/Link"; 
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import ReportProblemIcon from "@mui/icons-material/ReportProblem";
+import { Proportions } from 'lucide-react';
 // DASHBOARD SECTIONS
 export const DashboardSections = [
   {
@@ -116,6 +114,11 @@ export const DashboardSections = [
         link: "/dashboard/peer-esg-benchmarking",
         icon: <CompareIcon />,
       },
+      {
+        Title: "ESG Reports Export & Alerts",
+        link: "/dashboard/ESG-Reports-Export-Alerts",
+        icon: <Proportions />,
+      },
     ],
   },
   {
@@ -135,27 +138,6 @@ export const DashboardSections = [
         Title: "Governance Red Flag Index",
         link: "/dashboard/governance-red-flag-index",
         icon: <ReportProblemIcon />,
-      },
-    ],
-  }
-  ,
-  {
-    heading: "Governance & Integrity",
-    items: [
-      {
-        Title: "Leadership Integrity Reports",
-        link: "/dashboard/leadership-integrity-reports",
-        icon: <HowToRegIcon />,
-      },
-      {
-        Title: "Insider & Related Party Activity",
-        link: "/dashboard/insider-related-party-activity",
-        icon: <GroupIcon />,
-      },
-      {
-        Title: "Governance Red Flag Index",
-        link: "/dashboard/governance-red-flag-index",
-        icon: <GavelIcon />,
       },
     ],
   },
