@@ -13,7 +13,7 @@ import {
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useToast } from "@/components/ui/use-toast";
 import { Eye, EyeOff, Lock, Mail } from "lucide-react";
-import LoginBackGround from "../asset/LoginBackGround.jpg";
+import LoginBackGround from "../../asset/LoginBackGround.jpg";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ const Login = () => {
           title: "Login successful",
           description: "Welcome to FinIntel dashboard",
         });
-        navigate("/dashboard");
+        navigate("/dashboard/equity-research-report");
       } else {
         setError("Please enter both email and password");
       }

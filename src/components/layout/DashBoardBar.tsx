@@ -103,7 +103,7 @@ export default function ResponsiveDrawer(props: Props) {
       </Toolbar>
 
       <ScrollableContent>
-        <List style={{ margin: "10px", padding: "0px 0px 0px 0px" }}>
+        {/* <List style={{ margin: "10px", padding: "0px 0px 0px 0px" }}>
           <SectionBox>
             <SectionHeader1
               className={location.pathname === "/dashboard" ? "active-1" : ""}
@@ -113,7 +113,7 @@ export default function ResponsiveDrawer(props: Props) {
               <SectionTitle1>Dashboard</SectionTitle1>
             </SectionHeader1>
           </SectionBox>
-        </List>
+        </List> */}
         <List style={{ margin: "10px", padding: "0px" }}>
           {DashboardSections.map((section, sectionIndex) => (
             <SectionBox key={sectionIndex}>
