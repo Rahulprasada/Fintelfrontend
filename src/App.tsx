@@ -3,20 +3,20 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import InvestmentReports from "./pages/InvestmentReports";
-import ResearchPlatform from "./pages/ResearchPlatform";
-import AdvisoryServices from "./pages/AdvisoryServices";
-import Community from "./pages/Community";
-import NotFound from "./pages/NotFound";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsOfService from "./pages/TermsOfService";
-import Legal from "./pages/Legal";
-import About from "./pages/About";
-import Career from "./pages/Career";
-import Pricing from "./pages/Pricing";
-import Login from "@/pages/Login";
-import ForgotPassword from "./pages/ForgotPassword";
+import Index from "./pages/LandingPages/Index";
+import InvestmentReports from "./pages/LandingPages/InvestmentReports";
+import ResearchPlatform from "./pages/LandingPages/ResearchPlatform";
+import AdvisoryServices from "./pages/LandingPages/AdvisoryServices";
+import Community from "./pages/LandingPages/Community";
+import NotFound from "./pages/LandingPages/NotFound";
+import PrivacyPolicy from "./pages/LandingPages/PrivacyPolicy";
+import TermsOfService from "./pages/LandingPages/TermsOfService";
+import Legal from "./pages/LandingPages/Legal";
+import About from "./pages/LandingPages/About";
+import Career from "./pages/LandingPages/Career";
+import Pricing from "./pages/LandingPages/Pricing";
+import Login from "@/pages/LandingPages/Login";
+import ForgotPassword from "./pages/LandingPages/ForgotPassword";
 import ResponsiveDrawer from "./components/layout/DashBoardBar";
 import DashBoard from "./pages/Dashboard/Index";
 import InvestmentAgentLab from "./pages/ResearchAnalysis/InvestmentAgentLab/Index";
@@ -98,7 +98,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/dashboard" element={<ResponsiveDrawer />}>
-              <Route index element={<DashBoard />} />
+              {/* <Route index element={<DashBoard />} /> */}
               <Route path="equity-research-report">
                 <Route index element={<EquityResearchReport />} />
                 <Route path="newreport" element={<NewReportForm />} />

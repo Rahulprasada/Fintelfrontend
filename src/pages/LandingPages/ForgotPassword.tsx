@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useToast } from "@/components/ui/use-toast";
 import { ArrowLeft, Mail } from "lucide-react";
-import LoginBackGround from "../asset/LoginBackGround.jpg";
+import LoginBackGround from "../../asset/LoginBackGround.jpg";
 
 const ForgotPassword = () => {
   const { toast } = useToast();
