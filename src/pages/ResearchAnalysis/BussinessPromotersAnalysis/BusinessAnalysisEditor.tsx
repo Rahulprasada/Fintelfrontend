@@ -71,8 +71,8 @@ export default function BusinessAnalysisEditorPage() {
   };
 
   return (
-    <div className="p-4 space-y-6">
-      <div className="flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
+    <div className="space-y-6">
+      <div className="flex flex-col gap-4 md:flex-row md:justify-between md:items-center p-4 rounded-lg" style={{background:"linear-gradient(to right, #d5e2f3, #effcec)"}}>
         <div className="flex flex-col gap-1">
           <div className="flex items-center gap-2">
             <Link to="/dashboard/business-promoter-analysis">
@@ -130,7 +130,7 @@ export default function BusinessAnalysisEditorPage() {
         </div>
       </div>
 
-      <Separator className="my-6" />
+      {/* <Separator className="my-6" /> */}
 
       <Card className="border-t-4 border-t-finance-purple">
         <Tabs
