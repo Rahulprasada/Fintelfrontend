@@ -13,8 +13,9 @@ import { Badge, styled } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import { BarChart3 } from "lucide-react";
+import { FileText } from "lucide-react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Collapse from "@mui/material/Collapse";
@@ -24,6 +25,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import { DashboardSections } from "./NavConfig";
+import { Button } from "../ui/button";
+import { UserQuestionnaire } from "./UserQuestionerie";
+import { Dialog, DialogTrigger } from "../ui/dialog";
 
 const drawerWidth = 320;
 
@@ -38,6 +42,7 @@ export default function ResponsiveDrawer(props: Props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+   const [questionnaireOpen, setQuestionnaireOpen] = React.useState(false);
 
   const [expandedSection, setExpandedSection] = React.useState("");
 
@@ -75,23 +80,23 @@ export default function ResponsiveDrawer(props: Props) {
   };
 
   const heading =
-  DashboardSections.find((section) =>
-    section.items.some(item =>
-       location.pathname.startsWith(item.link)))?.heading || "Dashboard";
+    DashboardSections.find((section) =>
+      section.items.some((item) => location.pathname.startsWith(item.link))
+    )?.heading || "Dashboard";
 
   const isSectionActive = (items) => {
-    return items.some(item => location.pathname === item.link);
+    return items.some((item) => location.pathname === item.link);
   };
 
- React.useEffect(() => {
-  const activeSection = DashboardSections.find((section) =>
-    section.items.some((item) => location.pathname === item.link)
-  );
+  React.useEffect(() => {
+    const activeSection = DashboardSections.find((section) =>
+      section.items.some((item) => location.pathname === item.link)
+    );
 
-  if (activeSection) {
-    setExpandedSection(activeSection.heading);
-  }
-}, [location.pathname]);
+    if (activeSection) {
+      setExpandedSection(activeSection.heading);
+    }
+  }, [location.pathname]);
 
   const drawer = (
     <div className="flex flex-col h-full">
@@ -198,22 +203,34 @@ export default function ResponsiveDrawer(props: Props) {
           </IconButton>
           <AppBarTitle>{heading}</AppBarTitle>
           <IconBox>
-          <IconButton
+             <Dialog open={questionnaireOpen} onOpenChange={setQuestionnaireOpen}>
+          <DialogTrigger asChild>
+            <Button 
+              // size={isMobile ? "icon" : "default"} 
+              className="bg-finance-blue text-white hover:bg-finance-blue/80"
+            >
+              <FileText size={"16"} className="mr-0 sm:mr-2" />
+               <span className="hidden sm:block">Financial Plan</span>
+            </Button>
+          </DialogTrigger>
+          <UserQuestionnaire onClose={() => setQuestionnaireOpen(false)} />
+        </Dialog> 
+            <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
-              sx={{marginRight:"20px"}}
+              sx={{ marginRight: "20px" }}
             >
               <Badge badgeContent={2} color="error">
-                <NotificationsIcon style={{color:"#281c6d"}}/>
+                <NotificationsIcon style={{ color: "#281c6d" }} />
               </Badge>
             </IconButton>
-          <StyledAvatar onClick={handleClickOpen}>V</StyledAvatar>
-          <ProfileDialogBox
-            open={open}
-            setOpen={setOpen}
-            onClose={handleClose}
-          />
+            <StyledAvatar onClick={handleClickOpen}>V</StyledAvatar>
+            <ProfileDialogBox
+              open={open}
+              setOpen={setOpen}
+              onClose={handleClose}
+            />
           </IconBox>
         </Toolbar>
       </AppBar>
@@ -269,12 +286,12 @@ export default function ResponsiveDrawer(props: Props) {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           // backgroundColor: "#f5fafa",
           backgroundColor: "#f7f7f8",
-          minHeight: "100vh", 
-          overflowY: "auto",   
+          minHeight: "100vh",
+          overflowY: "auto",
         }}
       >
         <Toolbar />
-        <Outlet/>
+        <Outlet />
       </Box>
     </Box>
   );
@@ -415,8 +432,8 @@ const StyledAvatar = styled(Avatar)`
 `;
 
 const IconBox = styled(Box)`
-   display: flex;
-   flex-direction: row;
-   align-items: center;
-   justify-content: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;
