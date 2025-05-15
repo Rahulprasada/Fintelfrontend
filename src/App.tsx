@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Index from "./pages/LandingPages/Index";
 import InvestmentReports from "./pages/LandingPages/InvestmentReports";
 import ResearchPlatform from "./pages/LandingPages/ResearchPlatform";
@@ -18,7 +18,7 @@ import Pricing from "./pages/LandingPages/Pricing";
 import Login from "@/pages/LandingPages/Login";
 import ForgotPassword from "./pages/LandingPages/ForgotPassword";
 import ResponsiveDrawer from "./components/layout/DashBoardBar";
-import DashBoard from "./pages/Dashboard/Index";
+// import DashBoard from "./pages/Dashboard/Index";
 import InvestmentAgentLab from "./pages/ResearchAnalysis/InvestmentAgentLab/Index";
 import BusinessPromoterAnalysis from "./pages/ResearchAnalysis/BussinessPromotersAnalysis/Index";
 import PositionSizing from "./pages/QuantAlogTools/PositionSizing/Index";
@@ -56,9 +56,10 @@ import {
   defaultCompanyId,
   esgCompanies,
 } from "./pages/EsgInsight/Sustainability/ESGData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ESGAlertsPanel } from "./pages/EsgInsight/ESGReport&Alerts/Index";
 import { companies } from "./pages/ForensicReports/Data/ForensicData";
+import { getPageTitle, setDocumentTitle } from "./lib/Seo";
 
 const queryClient = new QueryClient();
 
@@ -76,6 +77,17 @@ const App = () => {
     setSelectedCompanyId1(companyId);
   };
 
+const SEO = () => {
+  const location = useLocation();
+  
+  useEffect(() => {
+    const pageTitle = getPageTitle(location.pathname);
+    setDocumentTitle(pageTitle);
+  }, [location.pathname]);
+  
+  return null;
+};
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
@@ -83,6 +95,7 @@ const App = () => {
         <Sonner />
         <BrowserRouter>
           <ScrollToTop />
+            <SEO />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/investment-reports" element={<InvestmentReports />} />
