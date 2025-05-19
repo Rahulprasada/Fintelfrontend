@@ -279,7 +279,7 @@ const AlgorithmExecution = () => {
   return (
     <div className="space-y-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <Card className="border-t-8 border-t-orange-400 bg-white shadow-md bg-gradient-to-b from-blue-100 to-gray-500">
+        <Card className="border-t-8 border-t-orange-400 bg-white shadow-md bg-gradient-to-b from-blue-100 to-gray-300">
           <CardHeader>
             <CardTitle className="bg-gradient-to-r from-orange-400 to-gray-500 bg-clip-text text-transparent">
               Broker Connection
@@ -358,7 +358,7 @@ const AlgorithmExecution = () => {
           </CardContent>
         </Card>
 
-        <Card className="border-t-8 border-t-orange-400 bg-white shadow-md bg-gradient-to-b from-blue-100 to-gray-500">
+        <Card className="border-t-8 border-t-orange-400 bg-white shadow-md bg-gradient-to-b from-blue-100 to-gray-300">
           <CardHeader>
             <CardTitle className="bg-gradient-to-r from-orange-400 to-gray-500 bg-clip-text text-transparent">
               Strategy Selection

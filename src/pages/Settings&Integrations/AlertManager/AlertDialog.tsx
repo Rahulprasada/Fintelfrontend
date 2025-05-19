@@ -164,12 +164,12 @@ export default function AlertDialog({
   
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[600px]">
+      <DialogContent className="sm:max-w-[600px] w-[95vw] max-h-[70vh] overflow-y-auto p-4 md:p-6">
         <DialogHeader>
           <DialogTitle>{alert ? "Edit" : "Create"} Alert</DialogTitle>
         </DialogHeader>
         
-        <ScrollArea className="max-h-[70vh]">
+        {/* <ScrollArea className="max-h-[50vh]"> */}
           <div className="px-1 py-2 space-y-5">
             <div className="space-y-2">
               <Label htmlFor="alert-name">Alert Name</Label>
@@ -352,7 +352,7 @@ export default function AlertDialog({
               )}
             </div>
           </div>
-        </ScrollArea>
+        {/* </ScrollArea> */}
         
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)}>

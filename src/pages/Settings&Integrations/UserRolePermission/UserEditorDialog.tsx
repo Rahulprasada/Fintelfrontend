@@ -125,7 +125,7 @@ export default function UserEditorDialog({
   
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[600px] h-[80vh]">
+      <DialogContent className="sm:max-w-[600px] h-[70vh]">
         <DialogHeader>
           <DialogTitle>Edit User</DialogTitle>
         </DialogHeader>
