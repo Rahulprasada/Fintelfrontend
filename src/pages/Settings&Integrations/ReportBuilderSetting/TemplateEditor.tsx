@@ -164,7 +164,7 @@ export default function TemplateEditorDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[800px] max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-[800px] w-[95vw] max-h-[70vh] overflow-y-auto p-4 md:p-6">
         <DialogHeader>
           <DialogTitle>{template ? "Edit" : "Create"} Report Template</DialogTitle>
         </DialogHeader>

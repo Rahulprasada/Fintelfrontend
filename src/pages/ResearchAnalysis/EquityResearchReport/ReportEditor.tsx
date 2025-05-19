@@ -103,7 +103,7 @@ export default function ReportEditor() {
 
   const handleSubmitForReview = () => {
     toast.success("Report submitted for review");
-    navigate("/");
+    navigate("/dashboard/equity-research-report");
   };
 
   const handleAddSection = () => {

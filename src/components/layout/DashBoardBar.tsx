@@ -29,7 +29,7 @@ import { Button } from "../ui/button";
 import { UserQuestionnaire } from "./UserQuestionerie";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 
-const drawerWidth = 320;
+const drawerWidth = 300;
 
 interface Props {
   window?: () => Window;
@@ -179,8 +179,8 @@ export default function ResponsiveDrawer(props: Props) {
         position="fixed"
         sx={{
           backgroundColor: "#fff",
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
+          width: { md: `calc(100% - ${drawerWidth}px)` },
+          ml: { md: `${drawerWidth}px` },
           borderRight: "#ece6e6)",
           boxShadow: "1px 0 6px rgba(179, 175, 175, 0.1)",
         }}
@@ -197,7 +197,7 @@ export default function ResponsiveDrawer(props: Props) {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+            sx={{ mr: 2, display: { md: "none" } }}
           >
             <MenuIcon style={{ color: "#160d35" }} />
           </IconButton>
@@ -209,8 +209,8 @@ export default function ResponsiveDrawer(props: Props) {
               // size={isMobile ? "icon" : "default"} 
               className="bg-finance-blue text-white hover:bg-finance-blue/80"
             >
-              <FileText size={"16"} className="mr-0 sm:mr-2" />
-               <span className="hidden sm:block">Financial Plan</span>
+              <FileText size={"16"} className="mr-0 md:mr-2" />
+               <span className="hidden md:block">Financial Plan</span>
             </Button>
           </DialogTrigger>
           <UserQuestionnaire onClose={() => setQuestionnaireOpen(false)} />
@@ -236,7 +236,7 @@ export default function ResponsiveDrawer(props: Props) {
       </AppBar>
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
         aria-label="mailbox folders"
       >
         <Drawer
@@ -246,7 +246,7 @@ export default function ResponsiveDrawer(props: Props) {
           onTransitionEnd={handleDrawerTransitionEnd}
           onClose={handleDrawerClose}
           sx={{
-            display: { xs: "block", sm: "none" },
+            display: { xs: "block", md: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
@@ -265,7 +265,7 @@ export default function ResponsiveDrawer(props: Props) {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: "none", sm: "block" },
+            display: { xs: "none", md: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
@@ -283,7 +283,7 @@ export default function ResponsiveDrawer(props: Props) {
         sx={{
           flexGrow: 1,
           p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          width: { md: `calc(100% - ${drawerWidth}px)` },
           // backgroundColor: "#f5fafa",
           backgroundColor: "#f7f7f8",
           minHeight: "100vh",
@@ -421,7 +421,7 @@ const AppBarTitle = styled(Typography)(({ theme }) => ({
   fontWeight: 700,
   fontSize: "20px",
   display: "none",
-  [theme.breakpoints.up("sm")]: {
+  [theme.breakpoints.up("md")]: {
     display: "block",
   },
 }));
