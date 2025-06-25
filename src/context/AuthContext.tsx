@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 // Define types
 interface User {
-  id: number; // Added id, as it's returned by UserStatusView
+  id: number; 
   username: string;
   email: string;
   is_active: boolean;
