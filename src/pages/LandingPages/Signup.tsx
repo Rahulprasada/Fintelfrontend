@@ -32,7 +32,7 @@ const Register: React.FC = () => {
       if (isEmailConfirmed) {
         navigate("/dashboard/investment-agent-lab");
       } else {
-        navigate("/confirm");
+        navigate("/login");
       }
     }
   }, [user, isEmailConfirmed, navigate]);
@@ -83,7 +83,7 @@ const Register: React.FC = () => {
       if (isEmailConfirmed) {
         navigate("/dashboard/investment-agent-lab");
       } else {
-        navigate("/confirm");
+        navigate("/ConfirmEmailPage");
       }
     } catch (error: any) {
       console.log("-> Step 4: `register` FAILED.");

@@ -66,6 +66,7 @@ import { ScreenerProvider } from "./context/ScreenerContext";
 import ResultsTable from "./pages/QuantAlogTools/UtBotScreenResults";
 import Register from "./pages/LandingPages/Signup";
 import SampleHMMScreener from "./pages/HmmScreen";
+import ConfirmEmailPage from "./pages/ConfirmEmail/page";
 
 const queryClient = new QueryClient();
 
@@ -125,6 +126,7 @@ const App = () => {
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/terms" element={<TermsOfService />} />
                 <Route path="/legal" element={<Legal />} />
+                <Route path="/ConfirmEmailPage" element={<ConfirmEmailPage />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Register />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />

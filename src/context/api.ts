@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 
-// Define types
+// Define types (Keeping these as they are good)
 interface Index {
   symbols: string[];
   exchange_suffix: string;
@@ -34,49 +34,19 @@ interface ApiResponse<T> {
   data?: T;
 }
 
-
 export interface ScreenerApiParams {
   symbols: string[];
   period?: string;
   interval?: string;
-  // Add other parameters your API accepts
+  feature_sets?: string[][];
+  window?: number;
+  max_states?: number;
+  train_window?: number;
+  exchange_suffix?: string;
+  max_workers?: number;
+  use_rolling_window?: boolean;
+  slippage?: number;
 }
-
-
-// Use the environment variable for the API URL with a fallback
-const API_URL =
-  typeof process !== "undefined" && process.env.REACT_APP_API_URL
-    ? "kk"
-    : "http://localhost:8000/api/";
-
-const api: AxiosInstance = axios.create({
-  baseURL: API_URL,
-  timeout: 300000, // Increased timeout for potentially long screening tasks (5 minutes)
-});
-
-// Add a request interceptor to log requests
-api.interceptors.request.use(
-  (request) => {
-    console.log("Starting Request", request);
-    return request;
-  },
-  (error) => {
-    console.error("Request Error:", error);
-    return Promise.reject(error);
-  }
-);
-
-// Add a response interceptor to log responses
-api.interceptors.response.use(
-  (response) => {
-    console.log("Response:", response);
-    return response;
-  },
-  (error) => {
-    console.error("Response Error:", error.response || error.message || error);
-    return Promise.reject(error);
-  }
-);
 
 export interface ScreenerResult {
   Stock: string;
@@ -86,37 +56,102 @@ export interface ScreenerResult {
   'Latest Regime'?: string;
   Converged?: boolean;
   Error?: string | null;
-  // Add all other fields from your Python DEFAULT_RESULT dictionary
-  [key: string]: any; 
+  [key: string]: any;
 }
-const API_BASE_URL = 'http://localhost:8000';
 
-export const runScreenerAPI = async (params: ScreenerApiParams): Promise<ScreenerResult[]> => {
-  // Use the URL constructor to safely join the correct path
-  // This will create http://localhost:8000/api/screen_stocks/
-  const url = new URL('api/screen_stocks/', API_BASE_URL);
+const API_BASE_URL = import.meta.env.VITE_API_URL || "https://web-production-5afd2.up.railway.app";
 
-  const response = await fetch(url.toString(), {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(params),
-  });
+const api: AxiosInstance = axios.create({
+  baseURL: `${API_BASE_URL}/api/`, // All requests will be prefixed with this
+  timeout: 300000, // 5 minutes for long tasks
+});
 
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.error || 'Failed to fetch screener results from the API.');
+// --- Axios Interceptors ---
+
+// Request interceptor: Attach Authorization header if a token exists
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("access_token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+      console.log("Request Interceptor: Token attached.");
+    } else {
+      console.log("Request Interceptor: No token found.");
+    }
+    console.log("Starting Request:", config.url, config.method, config.data);
+    return config;
+  },
+  (error) => {
+    console.error("Request Error:", error.message, error.config);
+    return Promise.reject(error);
   }
+);
 
-  return response.json();
-};
+// Response interceptor: Log responses and handle 401 for token expiry
+api.interceptors.response.use(
+  (response) => {
+    console.log("Response (Success):", response.status, response.config.url, response.data);
+    return response;
+  },
+  async (error) => {
+    console.error("Response Error:", error.response?.status, error.config?.url, error.response?.data || error.message);
+
+    const originalRequest = error.config;
+
+    // Handle 401 Unauthorized errors for expired access tokens
+    // We only want to retry if it's a 401 and it hasn't been retried already
+    // And it's not the refresh token endpoint itself (to avoid infinite loops)
+    if (error.response?.status === 401 && !originalRequest._retry && originalRequest.url !== 'token/refresh/') {
+      originalRequest._retry = true; // Mark this request as retried
+      const refreshToken = localStorage.getItem("refresh_token");
+
+      if (refreshToken) {
+        try {
+          console.log("Attempting to refresh token...");
+          const refreshResponse = await axios.post(`${API_BASE_URL}/api/token/refresh/`, {
+            refresh: refreshToken,
+          });
+          const newAccessToken = refreshResponse.data.access;
+          localStorage.setItem("access_token", newAccessToken);
+          console.log("Token refreshed successfully. Retrying original request.");
+
+          // Update the Authorization header for the original request and retry
+          originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
+          return api(originalRequest); // Use the `api` instance to retry
+        } catch (refreshError: any) {
+          console.error("Token refresh failed:", refreshError.response?.data || refreshError.message);
+          // If refresh fails, clear all tokens and force logout
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("refresh_token");
+          // Consider using a more robust global state management for logout/redirect
+          window.location.href = '/login'; // Fallback: Force redirect to login
+          return Promise.reject(refreshError);
+        }
+      } else {
+        console.warn("No refresh token available. Cannot refresh. Redirecting to login.");
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
+        window.location.href = '/login'; // Force redirect to login
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
 // --- API Endpoints ---
 
-/**
- * Fetches the list of predefined indices.
- * @returns {Promise<Record<string, Index>>} Object containing index names and symbols.
- */
+// Using the `api` instance for all requests ensures interceptors are applied.
+
+export const runScreenerAPI = async (params: ScreenerApiParams): Promise<ScreenerResult[]> => {
+  try {
+    const response: AxiosResponse<ScreenerResult[]> = await api.post("screen_stocks/", params);
+    return response.data;
+  } catch (error: any) {
+    console.error("Error fetching screener results:", error);
+    throw error;
+  }
+};
+
 export const getIndices = async (): Promise<Record<string, Index>> => {
   try {
     const response: AxiosResponse<Record<string, Index>> = await api.get("indices/");
@@ -127,12 +162,6 @@ export const getIndices = async (): Promise<Record<string, Index>> => {
   }
 };
 
-/**
- * Validates a list of stock symbols.
- * @param symbols - Array of stock symbols (without suffix).
- * @param suffix - The exchange suffix (e.g., '.NS').
- * @returns {Promise<ValidationResult>} Valid and invalid symbols.
- */
 export const validateSymbols = async (
   symbols: string[],
   suffix: string
@@ -149,12 +178,7 @@ export const validateSymbols = async (
   }
 };
 
-/**
- * Sends screening parameters to the backend to run the screener.
- * @param params - Screening parameters.
- * @returns {Promise<ScreeningResult[]>} Array of screening result objects.
- */
-export const screenStocks = async (params: any): Promise<ScreeningResult[]> => {
+export const screenStocks = async (params: ScreenerApiParams): Promise<ScreeningResult[]> => {
   try {
     const response: AxiosResponse<ScreeningResult[]> = await api.post("screen_stocks/", params);
     return response.data;
@@ -164,10 +188,6 @@ export const screenStocks = async (params: any): Promise<ScreeningResult[]> => {
   }
 };
 
-/**
- * Fetches the last lines of the backend log file.
- * @returns {Promise<string>} Log file content.
- */
 export const getLogs = async (): Promise<string> => {
   try {
     const response: AxiosResponse<string> = await api.get("logs/");
@@ -178,10 +198,6 @@ export const getLogs = async (): Promise<string> => {
   }
 };
 
-/**
- * Fetches the current backend configuration.
- * @returns {Promise<Config>} Configuration object.
- */
 export const getConfig = async (): Promise<Config> => {
   try {
     const response: AxiosResponse<Config> = await api.get("config/");
@@ -192,11 +208,6 @@ export const getConfig = async (): Promise<Config> => {
   }
 };
 
-/**
- * Sends updated configuration to the backend to save.
- * @param config - Configuration object to save.
- * @returns {Promise<ApiResponse<Config>>} Result of the save operation.
- */
 export const saveConfig = async (config: Config): Promise<ApiResponse<Config>> => {
   try {
     const response: AxiosResponse<ApiResponse<Config>> = await api.post("config/", config);
@@ -207,10 +218,6 @@ export const saveConfig = async (config: Config): Promise<ApiResponse<Config>> =
   }
 };
 
-/**
- * Requests the backend to clear the data cache.
- * @returns {Promise<ApiResponse<void>>} Result of the clear operation.
- */
 export const clearCache = async (): Promise<ApiResponse<void>> => {
   try {
     const response: AxiosResponse<ApiResponse<void>> = await api.post("clear_cache/");
@@ -221,17 +228,13 @@ export const clearCache = async (): Promise<ApiResponse<void>> => {
   }
 };
 
-/**
- * Registers a new user with the backend.
- * @param data - Object containing username, email, and password.
- * @returns {Promise<ApiResponse<any>>} Response message or errors.
- */
 export const registerUser = async (data: {
   username: string;
   email: string;
   password: string;
 }): Promise<ApiResponse<any>> => {
   try {
+    // This uses the 'api' instance, but for registration, no token is expected or needed.
     const response: AxiosResponse<ApiResponse<any>> = await api.post("register/", data);
     return response.data;
   } catch (error: any) {
@@ -240,16 +243,10 @@ export const registerUser = async (data: {
   }
 };
 
-/**
- * Confirms a user's email with the token.
- * @param token - Confirmation token sent via email.
- * @returns {Promise<ApiResponse<any>>} Confirmation response.
- */
 export const confirmEmail = async (token: string): Promise<ApiResponse<any>> => {
   try {
-    const response: AxiosResponse<ApiResponse<any>> = await api.post("confirm-email/", {
-      token,
-    });
+    // Corrected: The backend ConfirmEmailView is a GET request with token in query params.
+    const response: AxiosResponse<ApiResponse<any>> = await api.get(`confirm-email/?token=${token}`);
     return response.data;
   } catch (error: any) {
     console.error("Error confirming email:", error);
