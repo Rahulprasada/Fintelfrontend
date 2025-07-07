@@ -224,7 +224,8 @@ const UtBotScreener = () => {
     ];
   });
 
-  const [currentTab, setCurrentTab] = useState(0);
+  const [mainTab, setMainTab] = useState<string>("configuration");
+  const [currentTab, setCurrentTab] = useState(0); // For inner tabs on results page
   const [filter, setFilter] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<string>("Calmar Ratio");
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
@@ -474,8 +475,14 @@ const UtBotScreener = () => {
   }, [results, selectedStockResult, selectStock]);
 
   const handleRunClick = useCallback(async () => {
+    // A helper function to show status and scroll
+    const showErrorAndScroll = (message: string, type: "warning" | "error") => {
+      showStatus(message, type);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
     if (!user || !isEmailConfirmed) {
-      showStatus("Please log in and confirm your email.", "warning");
+      showErrorAndScroll("Please log in and confirm your email.", "warning");
       console.log("Auth check failed");
       return;
     }
@@ -484,45 +491,31 @@ const UtBotScreener = () => {
     try {
       if (inputMethod === "Select Index") {
         if (!selectedIndex || !indices[selectedIndex]) {
-          showStatus("Please select a valid index.", "warning");
+          showErrorAndScroll("Please select a valid index.", "warning");
           console.log("Invalid index selected:", selectedIndex);
           return;
         }
         symbolsList = indices[selectedIndex].symbols || [];
-        console.log("Selected index symbols:", symbolsList);
-      } else if (inputMethod === "Enter Stocks") {
-        symbolsList = symbolsInput
-          .split(",")
-          .map((s) => s.trim())
-          .filter((s) => s);
-        console.log("Entered symbols:", symbolsList);
-      } else if (inputMethod === "Upload CSV") {
-        symbolsList = symbolsInput
-          .split(",")
-          .map((s) => s.trim())
-          .filter((s) => s);
-        console.log("CSV symbols:", symbolsList);
+      } else if (inputMethod === "Enter Stocks" || inputMethod === "Upload CSV") {
+        symbolsList = symbolsInput.split(",").map((s) => s.trim()).filter((s) => s);
       } else {
-        showStatus("Invalid input method selected.", "warning");
+        showErrorAndScroll("Invalid input method selected.", "warning");
         console.log("Invalid input method:", inputMethod);
         return;
       }
     } catch (err) {
       console.error("Error processing symbols:", err);
-      showStatus(
-        "Failed to process symbols. Please check your input.",
-        "error"
-      );
+      showErrorAndScroll("Failed to process symbols. Please check your input.", "error");
       return;
     }
 
     if (!symbolsList || symbolsList.length === 0) {
-      showStatus("Please enter or select stocks.", "warning");
+      showErrorAndScroll("Please enter or select stocks.", "warning");
       console.log("No symbols provided");
       return;
     }
     if (features.length === 0) {
-      showStatus("Please select at least one feature for the HMM.", "warning");
+      showErrorAndScroll("Please select at least one feature for the HMM.", "warning");
       console.log("No features selected");
       return;
     }
@@ -533,15 +526,13 @@ const UtBotScreener = () => {
         symbolsList.map((s) => s.replace(exchangeSuffix, "")),
         exchangeSuffix
       );
-      console.log("Validation result:", validationResult);
+      
       if (
         validationResult.invalid_symbols &&
         Object.keys(validationResult.invalid_symbols).length > 0
       ) {
-        const invalid = Object.keys(validationResult.invalid_symbols).join(
-          ", "
-        );
-        showStatus(`Invalid symbols: ${invalid}`, "warning");
+        const invalid = Object.keys(validationResult.invalid_symbols).join(", ");
+        showErrorAndScroll(`Invalid symbols found: ${invalid}. Please correct them and try again.`, "warning");
         console.log("Invalid symbols:", invalid);
         return;
       }
@@ -549,12 +540,10 @@ const UtBotScreener = () => {
         (s) => `${s}${exchangeSuffix}`
       );
       console.log("Validated symbols:", symbolsList);
+
     } catch (err: any) {
-      console.error("Symbol validation failed:", err);
-      showStatus(
-        "Failed to validate symbols. Please check your input.",
-        "error"
-      );
+      console.error("Symbol validation API failed:", err);
+      showErrorAndScroll("Failed to validate symbols due to a server error. Please try again later.", "error");
       return;
     }
 
@@ -575,11 +564,13 @@ const UtBotScreener = () => {
     try {
       await runScreener(params);
       console.log("Screener run successfully, switching to Results tab");
-      setCurrentTab(0); // Switch to Results tab (Results Table)
+      setMainTab("results"); // SUCCESS: Switch main view to the Results tab
+      setCurrentTab(0); // Ensure the inner results view is on the table
       showStatus("Screener run successfully. Viewing results.", "success");
     } catch (err: any) {
       console.error("runScreener failed:", err);
-      showStatus("Failed to run screener. Please try again.", "error");
+      // ERROR: Show status and scroll to top, but DO NOT navigate
+      showErrorAndScroll("Failed to run screener. Please check your parameters and try again.", "error");
     }
   }, [
     runScreener,
@@ -828,7 +819,11 @@ const UtBotScreener = () => {
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
-      <Tabs defaultValue="configuration" className="w-full">
+      <Tabs
+        value={mainTab}
+        onValueChange={setMainTab}
+        className="w-full"
+      >
         <TabsList className="mb-6 grid w-full grid-cols-2 md:w-1/2 mx-auto">
           <TabsTrigger value="configuration">Configuration</TabsTrigger>
           <TabsTrigger value="results">Results</TabsTrigger>
