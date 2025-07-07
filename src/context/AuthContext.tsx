@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             localStorage.removeItem("refresh_token");
             setUser(null);
             setIsEmailConfirmed(false);
-            navigate("/login"); // Redirect to login if token is expired
+            navigate("/"); // Redirect to login if token is expired
             setLoading(false);
             return;
           }
@@ -98,7 +98,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           localStorage.removeItem("refresh_token");
           setUser(null);
           setIsEmailConfirmed(false);
-          navigate("/login");
+          navigate("/");
         } finally {
           setLoading(false);
         }
@@ -109,7 +109,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         setLoading(false);
         // Only navigate to login if not already on a public route like login/register/confirm
         if (!['/login', '/register', '/confirm'].includes(window.location.pathname)) {
-            navigate("/login");
+            navigate("/");
         }
       }
     };
@@ -204,7 +204,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     localStorage.removeItem("refresh_token");
     setUser(null);
     setIsEmailConfirmed(false);
-    navigate("/login");
+    navigate("/");
   };
 
   return (
